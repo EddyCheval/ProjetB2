@@ -1,0 +1,85 @@
+﻿<Page x:Class="ApplicationMarcassin.CreateCompetence"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationMarcassin"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="750"
+      Title="CreateCompetence">
+
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">Ajout de Compétence</Label>
+
+        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="Intitulé"/>
+        <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="C1">Intitule</TextBox>
+
+        <Label Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  Content="Date"/>
+        <Calendar VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="2" Grid.RowSpan="1" Grid.ColumnSpan="1" Name="C3"/>
+
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Name="LabelDescription" Content="Description"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" x:Name="C2" Grid.Column="2" Grid.Row="2" Text="Description"/>
+
+
+        <Label Content="Langue" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ListBox Name="list" Grid.Column="2" Grid.Row="3">
+        </ListBox>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="4" Grid.Row="3">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Label VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="CompetenceActuel :"/>
+                <ListBox ItemsSource="{Binding list2}" SelectedItem="{Binding CompetenceActuel}" Name="list2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding IntituleCompetence}"/>
+                                <Label Content="{Binding Annee}">
+                                </Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label x:Name="test"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="4">
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Actif :</Label>
+                <CheckBox Checked="B_Actif_Checked" Unchecked="B_Actif_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="B_Actif">
+
+                </CheckBox>
+                <Label x:Name="test2"></Label>
+                <Label  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Actuel :</Label>
+                <ToggleButton   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="B_Actuel">
+                    On/off
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <Label x:Name="l1" RenderTransformOrigin="0.505,9.3" Height="78"/>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Grid.Column="4" Grid.Row="4" x:Name="b" Click="b_Click" Content="Ok"/>
+
+    </Grid>
+</Page>

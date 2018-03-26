@@ -1,0 +1,3 @@
+﻿Le modèle a été généré avec des avertissements ou des erreurs.BBD.edmxConsultez la Liste d'erreurs pour plus d'informations. Ces problèmes doivent être résolus avant l'exécution de votre application.
+Le chargement des métadonnées à partir de la base de données a pris 00:00:05.1141524.
+La génération du modèle a pris 00:00:33.3877625.

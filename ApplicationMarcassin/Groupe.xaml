@@ -1,0 +1,116 @@
+﻿<Page x:Class="ApplicationMarcassin.Groupe"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationMarcassin"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="300"
+      Title="Groupe">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.70*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.50*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Création Groupe"/>
+
+        <!--Titre-->
+        <Label Grid.Column="0" Grid.Row="1" Content="Titre : "/>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="Titre" Text="Titre"/>
+
+        <!--Date de la Réunion-->
+        <Label Grid.Column="0" Grid.Row="2" Content="Date de la Réunion : "/>
+        <Calendar Grid.Column="1" Grid.Row="2" Name="Date"/>
+
+        <!--Participant-->
+
+        <Label Grid.Column="0" Grid.Row="3" Content="Participant :"/>
+        <Grid Grid.Column="0" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Name="TextRecherche" Text="Rechercher" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button Grid.Column="1" VerticalAlignment="Center" Name="ButtonRecherche" Content="Rechercher" Click="ButtonRecherche_Click" />
+        </Grid>
+        <ListView Grid.Column="1" Grid.Row="3" Name="ListViewParticipant">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true"
+                     ColumnHeaderToolTip="Competence Information">
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Nom}" 
+                      Header="Nom" Width="50"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=Prenom}" 
+                      Width="50" Header="Prénom"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=Id_Employe}" 
+                      Header="Identifiant" Width="75"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--Tuteur-->
+        <Label Grid.Column="0" Grid.Row="4" Content="Tuteur : "/>
+        <ListBox Grid.Column="1" Grid.Row="4" Name="ListBoxTuteur">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Content="{Binding Prenom}"/>
+                        <Label Grid.Column="1" Content="{Binding Nom}"/>
+                        <Label Grid.Column="3" Content="{Binding Id_Employe}"/>
+                        <Button Click="Button_Click" Grid.Column="2" Content="Supprimer du Groupe"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--Compétence-->
+        <Label Grid.Column="0" Grid.Row="5" Content="Compétence"/>
+        <ListView Grid.Column="1" Grid.Row="5" Name="ListViewCompetence">
+            <ListView.View>
+
+                <GridView AllowsColumnReorder="true"
+                     ColumnHeaderToolTip="Competence Information">
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Annee}" 
+                      Header="Année" Width="50"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=IntituleCompetence}" 
+                      Width="90" Header="Intitule"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=Id_Competence}" 
+                      Header="Id" Width="25"/>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <Button Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Enregistrer" Click="Enregistrement_Click" Name="Enregistrement"/>
+    </Grid>
+</Page>

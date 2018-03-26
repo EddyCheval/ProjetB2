@@ -1,0 +1,1653 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="Id_Categorie" />
+          </Key>
+          <Property Name="Id_Categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Intitule" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id_Super_Categorie" Type="int" />
+        </EntityType>
+        <EntityType Name="Competence">
+          <Key>
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Competence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Actuel" Type="bit" Nullable="false" />
+          <Property Name="Id_CompetenceActuel" Type="int" />
+          <Property Name="Annee" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Actif" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Employe" Type="int" Nullable="false" />
+          <Property Name="Id_Competence" Type="int" Nullable="false" />
+          <Property Name="Id_DuTuteur" Type="int" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+          </Key>
+          <Property Name="Id_Employe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresseMail" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Entreprise" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstInterne" Type="bit" Nullable="false" />
+          <Property Name="Metier" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LienLinkedin" Type="nvarchar" MaxLength="200" />
+          <Property Name="EstAdmin" Type="bit" Nullable="false" />
+          <Property Name="EstChefDeService" Type="bit" Nullable="false" />
+          <Property Name="Service" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateArrive" Type="date" Nullable="false" />
+          <Property Name="DateDepart" Type="date" />
+          <Property Name="Actif" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="Id_Groupe" />
+          </Key>
+          <Property Name="Id_Groupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreation" Type="date" />
+          <Property Name="Titre" Type="nchar" MaxLength="10" />
+          <Property Name="EstValider" Type="bit" Nullable="false" />
+          <Property Name="DateReunion" Type="date" Nullable="false" />
+          <Property Name="Id_Competence" Type="int" />
+        </EntityType>
+        <EntityType Name="IntituleCategorie">
+          <Key>
+            <PropertyRef Name="Id_Categorie" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Categorie" Type="int" Nullable="false" />
+          <Property Name="Id_Langue" Type="int" Nullable="false" />
+          <Property Name="intitule" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IntituleCompetence">
+          <Key>
+            <PropertyRef Name="Id_Competence" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Competence" Type="int" Nullable="false" />
+          <Property Name="Id_Langue" Type="int" Nullable="false" />
+          <Property Name="intitule" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Langue" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Default" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguePossede">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Employe" Type="int" Nullable="false" />
+          <Property Name="Id_Langue" Type="int" Nullable="false" />
+          <Property Name="Default" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiaisonCategorieMultiple">
+          <Key>
+            <PropertyRef Name="Id_Competence" />
+            <PropertyRef Name="Id_Categoire" />
+          </Key>
+          <Property Name="Id_Competence" Type="int" Nullable="false" />
+          <Property Name="Id_Categoire" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiaisonCompetence">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Employe" Type="int" Nullable="false" />
+          <Property Name="Id_Competence" Type="int" Nullable="false" />
+          <Property Name="EstTutorant" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Membre">
+          <Key>
+            <PropertyRef Name="Id_Groupe" />
+            <PropertyRef Name="Id_Employe" />
+          </Key>
+          <Property Name="Id_Groupe" Type="int" Nullable="false" />
+          <Property Name="Id_Employe" Type="int" Nullable="false" />
+          <Property Name="EstTutorant" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messagerie">
+          <Key>
+            <PropertyRef Name="Id_Message" />
+          </Key>
+          <Property Name="Id_Message" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Groupe" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Contenu" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Expediteur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id_Tutore" />
+            <PropertyRef Name="Id_Tuteur" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Tutore" Type="int" Nullable="false" />
+          <Property Name="Id_Tuteur" Type="int" Nullable="false" />
+          <Property Name="Id_Competence" Type="int" Nullable="false" />
+          <Property Name="Note" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Categorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Categorie1" Type="Self.Categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Principal>
+            <Dependent Role="Categorie1">
+              <PropertyRef Name="Id_Super_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competence_CompetenceActuel">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="0..1" />
+          <End Role="Competence1" Type="Self.Competence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Competence1">
+              <PropertyRef Name="Id_CompetenceActuel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_DuTuteur">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_DuTuteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groupe_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="0..1" />
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Groupe">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCategorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="IntituleCategorie" Type="Self.IntituleCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Principal>
+            <Dependent Role="IntituleCategorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCategorie_Langue">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="IntituleCategorie" Type="Self.IntituleCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="IntituleCategorie">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCompetence_Competence1">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="IntituleCompetence" Type="Self.IntituleCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="IntituleCompetence">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCompetence_Langue1">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="IntituleCompetence" Type="Self.IntituleCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="IntituleCompetence">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguePossede_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="LanguePossede" Type="Self.LanguePossede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="LanguePossede">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguePossede_Langue">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="LanguePossede" Type="Self.LanguePossede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="LanguePossede">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LiaisonCategorieMultiple_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="LiaisonCategorieMultiple" Type="Self.LiaisonCategorieMultiple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Principal>
+            <Dependent Role="LiaisonCategorieMultiple">
+              <PropertyRef Name="Id_Categoire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LiaisonCategorieMultiple_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="LiaisonCategorieMultiple" Type="Self.LiaisonCategorieMultiple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="LiaisonCategorieMultiple">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membre_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Membre" Type="Self.Membre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Membre">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membre_Groupe">
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="1" />
+          <End Role="Membre" Type="Self.Membre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="Id_Groupe" />
+            </Principal>
+            <Dependent Role="Membre">
+              <PropertyRef Name="Id_Groupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="Id_Expediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Groupe">
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="Id_Groupe" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="Id_Groupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_EmployeTuteur">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Tuteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_EmployeTutore">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Tutore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemDeTutorat_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="LiaisonCompetence" Type="Self.LiaisonCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="LiaisonCompetence">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemDeTutorat_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="LiaisonCompetence" Type="Self.LiaisonCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="LiaisonCompetence">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CompCategorie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="Idlangue" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Intitule" Type="nvarchar" MaxLength="100" />
+                <Property Name="Description" Type="nvarchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Demandeur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id_Employe" Type="int" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Id_Competence" Type="int" />
+                <Property Name="Intitule" Type="nvarchar" MaxLength="100" />
+                <Property Name="Description" Type="nvarchar" MaxLength="500" />
+                <Property Name="Tutorant" Type="int" />
+                <Property Name="NomTutorant" Type="nvarchar" MaxLength="50" />
+                <Property Name="PrenomTutorant" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="DemandeurParCompetennceAvecLangueEtIntituleActu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdComp" Type="int" Mode="In" />
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Entreprise" Type="nvarchar" MaxLength="100" />
+                <Property Name="Service" Type="nvarchar" MaxLength="50" />
+                <Property Name="Intitule" Type="nvarchar" MaxLength="200" />
+                <Property Name="Description" Type="nvarchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GroupeMessagerie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Groupe" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id_Expediteur" Type="int" Nullable="false" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="Date" Type="date" Nullable="false" />
+                <Property Name="Contenu" Type="nvarchar" MaxLength="200" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="IntituleCategoriePourLangue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="IdCategorie" Type="int" Mode="In" />
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IntituleCompetencePourLangue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="IdCompetence" Type="int" Mode="In" />
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LangueEmployeParDefaut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LangueParDefaut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="MembresGroupe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Groupe" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="Statut" Type="bit" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="NoteMoyenne" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="IdEmploye" Type="int" Mode="In" />
+          <Parameter Name="IdCompetence" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Offrant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id_Employe" Type="int" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Id_Competence" Type="int" />
+                <Property Name="Intitule" Type="nvarchar" MaxLength="100" />
+                <Property Name="Description" Type="nvarchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="OffrantParCompetenceAvecLangueEtIntituleActu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdComp" Type="int" Mode="In" />
+          <Parameter Name="IdLangue" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+                <Property Name="Entreprise" Type="nvarchar" MaxLength="100" />
+                <Property Name="Service" Type="nvarchar" MaxLength="50" />
+                <Property Name="Intitule" Type="nvarchar" MaxLength="200" />
+                <Property Name="Description" Type="nvarchar" MaxLength="500" />
+                <Property Name="Note" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groupe" EntityType="Self.Groupe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntituleCategorie" EntityType="Self.IntituleCategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntituleCompetence" EntityType="Self.IntituleCompetence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Langue" EntityType="Self.Langue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguePossede" EntityType="Self.LanguePossede" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiaisonCategorieMultiple" EntityType="Self.LiaisonCategorieMultiple" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiaisonCompetence" EntityType="Self.LiaisonCompetence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Membre" EntityType="Self.Membre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messagerie" EntityType="Self.Messagerie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Categorie_Categorie" Association="Self.FK_Categorie_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Categorie1" EntitySet="Categorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competence_CompetenceActuel" Association="Self.FK_Competence_CompetenceActuel">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="Competence1" EntitySet="Competence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Competence" Association="Self.FK_Demande_Competence">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_DuTuteur" Association="Self.FK_Demande_DuTuteur">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Employe" Association="Self.FK_Demande_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groupe_Competence" Association="Self.FK_Groupe_Competence">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="Groupe" EntitySet="Groupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCategorie_Categorie" Association="Self.FK_IntituleCategorie_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="IntituleCategorie" EntitySet="IntituleCategorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCategorie_Langue" Association="Self.FK_IntituleCategorie_Langue">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="IntituleCategorie" EntitySet="IntituleCategorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCompetence_Competence1" Association="Self.FK_IntituleCompetence_Competence1">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="IntituleCompetence" EntitySet="IntituleCompetence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCompetence_Langue1" Association="Self.FK_IntituleCompetence_Langue1">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="IntituleCompetence" EntitySet="IntituleCompetence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguePossede_Employe" Association="Self.FK_LanguePossede_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="LanguePossede" EntitySet="LanguePossede" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguePossede_Langue" Association="Self.FK_LanguePossede_Langue">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="LanguePossede" EntitySet="LanguePossede" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LiaisonCategorieMultiple_Categorie" Association="Self.FK_LiaisonCategorieMultiple_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="LiaisonCategorieMultiple" EntitySet="LiaisonCategorieMultiple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LiaisonCategorieMultiple_Competence" Association="Self.FK_LiaisonCategorieMultiple_Competence">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="LiaisonCategorieMultiple" EntitySet="LiaisonCategorieMultiple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membre_Employe" Association="Self.FK_Membre_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Membre" EntitySet="Membre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membre_Groupe" Association="Self.FK_Membre_Groupe">
+            <End Role="Groupe" EntitySet="Groupe" />
+            <End Role="Membre" EntitySet="Membre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Employe" Association="Self.FK_Messagerie_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Messagerie" EntitySet="Messagerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Groupe" Association="Self.FK_Messagerie_Groupe">
+            <End Role="Groupe" EntitySet="Groupe" />
+            <End Role="Messagerie" EntitySet="Messagerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_Competence" Association="Self.FK_Note_Competence">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_EmployeTuteur" Association="Self.FK_Note_EmployeTuteur">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_EmployeTutore" Association="Self.FK_Note_EmployeTutore">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemDeTutorat_Competence" Association="Self.FK_SystemDeTutorat_Competence">
+            <End Role="Competence" EntitySet="Competence" />
+            <End Role="LiaisonCompetence" EntitySet="LiaisonCompetence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemDeTutorat_Employe" Association="Self.FK_SystemDeTutorat_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="LiaisonCompetence" EntitySet="LiaisonCompetence" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="CompCategorie_Result">
+          <Property Name="Intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="Demandeur_Result">
+          <Property Name="Id_Employe" Type="Int32" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Competence" Type="Int32" />
+          <Property Name="Intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Tutorant" Type="Int32" />
+          <Property Name="NomTutorant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrenomTutorant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="DemandeurParCompetennceAvecLangueEtIntituleActu_Result">
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entreprise" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Intitule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="Offrant_Result">
+          <Property Name="Id_Employe" Type="Int32" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Competence" Type="Int32" />
+          <Property Name="Intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="OffrantParCompetenceAvecLangueEtIntituleActu_Result">
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entreprise" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Intitule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="Id_Categorie" />
+          </Key>
+          <Property Name="Id_Categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Super_Categorie" Type="Int32" />
+          <NavigationProperty Name="Categorie1" Relationship="Self.FK_Categorie_Categorie" FromRole="Categorie" ToRole="Categorie1" />
+          <NavigationProperty Name="Categorie2" Relationship="Self.FK_Categorie_Categorie" FromRole="Categorie1" ToRole="Categorie" />
+          <NavigationProperty Name="IntituleCategories" Relationship="Self.FK_IntituleCategorie_Categorie" FromRole="Categorie" ToRole="IntituleCategorie" />
+          <NavigationProperty Name="Competences" Relationship="Self.LiaisonCategorieMultiple" FromRole="Categorie" ToRole="Competence" />
+        </EntityType>
+        <EntityType Name="Competence">
+          <Key>
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Competence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Actuel" Type="Boolean" Nullable="false" />
+          <Property Name="Id_CompetenceActuel" Type="Int32" />
+          <Property Name="Annee" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Actif" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Competence1" Relationship="Self.FK_Competence_CompetenceActuel" FromRole="Competence" ToRole="Competence1" />
+          <NavigationProperty Name="Competence2" Relationship="Self.FK_Competence_CompetenceActuel" FromRole="Competence1" ToRole="Competence" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Demande_Competence" FromRole="Competence" ToRole="Demande" />
+          <NavigationProperty Name="Groupes" Relationship="Self.FK_Groupe_Competence" FromRole="Competence" ToRole="Groupe" />
+          <NavigationProperty Name="IntituleCompetences" Relationship="Self.FK_IntituleCompetence_Competence1" FromRole="Competence" ToRole="IntituleCompetence" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK_Note_Competence" FromRole="Competence" ToRole="Note" />
+          <NavigationProperty Name="LiaisonCompetences" Relationship="Self.FK_SystemDeTutorat_Competence" FromRole="Competence" ToRole="LiaisonCompetence" />
+          <NavigationProperty Name="Categories" Relationship="Self.LiaisonCategorieMultiple" FromRole="Competence" ToRole="Categorie" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Employe" Type="Int32" Nullable="false" />
+          <Property Name="Id_Competence" Type="Int32" Nullable="false" />
+          <Property Name="Id_DuTuteur" Type="Int32" />
+          <NavigationProperty Name="Competence" Relationship="Self.FK_Demande_Competence" FromRole="Demande" ToRole="Competence" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Demande_DuTuteur" FromRole="Demande" ToRole="Employe" />
+          <NavigationProperty Name="Employe1" Relationship="Self.FK_Demande_Employe" FromRole="Demande" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+          </Key>
+          <Property Name="Id_Employe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdresseMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Entreprise" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EstInterne" Type="Boolean" Nullable="false" />
+          <Property Name="Metier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LienLinkedin" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EstAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="EstChefDeService" Type="Boolean" Nullable="false" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateArrive" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateDepart" Type="DateTime" Precision="0" />
+          <Property Name="Actif" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Demande_DuTuteur" FromRole="Employe" ToRole="Demande" />
+          <NavigationProperty Name="Demandes1" Relationship="Self.FK_Demande_Employe" FromRole="Employe" ToRole="Demande" />
+          <NavigationProperty Name="LanguePossedes" Relationship="Self.FK_LanguePossede_Employe" FromRole="Employe" ToRole="LanguePossede" />
+          <NavigationProperty Name="Membres" Relationship="Self.FK_Membre_Employe" FromRole="Employe" ToRole="Membre" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK_Note_EmployeTuteur" FromRole="Employe" ToRole="Note" />
+          <NavigationProperty Name="Notes1" Relationship="Self.FK_Note_EmployeTutore" FromRole="Employe" ToRole="Note" />
+          <NavigationProperty Name="LiaisonCompetences" Relationship="Self.FK_SystemDeTutorat_Employe" FromRole="Employe" ToRole="LiaisonCompetence" />
+          <NavigationProperty Name="Messageries" Relationship="Model.FK_Messagerie_Employe" FromRole="Employe" ToRole="Messagerie" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="Id_Groupe" />
+          </Key>
+          <Property Name="Id_Groupe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="DateTime" Precision="0" />
+          <Property Name="Titre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EstValider" Type="Boolean" Nullable="false" />
+          <Property Name="DateReunion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_Competence" Type="Int32" />
+          <NavigationProperty Name="Competence" Relationship="Self.FK_Groupe_Competence" FromRole="Groupe" ToRole="Competence" />
+          <NavigationProperty Name="Membres" Relationship="Self.FK_Membre_Groupe" FromRole="Groupe" ToRole="Membre" />
+          <NavigationProperty Name="Messageries" Relationship="Self.FK_Messagerie_Groupe" FromRole="Groupe" ToRole="Messagerie" />
+        </EntityType>
+        <EntityType Name="IntituleCategorie">
+          <Key>
+            <PropertyRef Name="Id_Categorie" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Categorie" Type="Int32" Nullable="false" />
+          <Property Name="Id_Langue" Type="Int32" Nullable="false" />
+          <Property Name="intitule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_IntituleCategorie_Categorie" FromRole="IntituleCategorie" ToRole="Categorie" />
+          <NavigationProperty Name="Langue" Relationship="Self.FK_IntituleCategorie_Langue" FromRole="IntituleCategorie" ToRole="Langue" />
+        </EntityType>
+        <EntityType Name="IntituleCompetence">
+          <Key>
+            <PropertyRef Name="Id_Competence" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Competence" Type="Int32" Nullable="false" />
+          <Property Name="Id_Langue" Type="Int32" Nullable="false" />
+          <Property Name="intitule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Competence" Relationship="Self.FK_IntituleCompetence_Competence1" FromRole="IntituleCompetence" ToRole="Competence" />
+          <NavigationProperty Name="Langue" Relationship="Self.FK_IntituleCompetence_Langue1" FromRole="IntituleCompetence" ToRole="Langue" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Langue" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Default" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IntituleCategories" Relationship="Self.FK_IntituleCategorie_Langue" FromRole="Langue" ToRole="IntituleCategorie" />
+          <NavigationProperty Name="IntituleCompetences" Relationship="Self.FK_IntituleCompetence_Langue1" FromRole="Langue" ToRole="IntituleCompetence" />
+          <NavigationProperty Name="LanguePossedes" Relationship="Self.FK_LanguePossede_Langue" FromRole="Langue" ToRole="LanguePossede" />
+        </EntityType>
+        <EntityType Name="LanguePossede">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Langue" />
+          </Key>
+          <Property Name="Id_Employe" Type="Int32" Nullable="false" />
+          <Property Name="Id_Langue" Type="Int32" Nullable="false" />
+          <Property Name="Default" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_LanguePossede_Employe" FromRole="LanguePossede" ToRole="Employe" />
+          <NavigationProperty Name="Langue" Relationship="Self.FK_LanguePossede_Langue" FromRole="LanguePossede" ToRole="Langue" />
+        </EntityType>
+        <EntityType Name="LiaisonCompetence">
+          <Key>
+            <PropertyRef Name="Id_Employe" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Employe" Type="Int32" Nullable="false" />
+          <Property Name="Id_Competence" Type="Int32" Nullable="false" />
+          <Property Name="EstTutorant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Competence" Relationship="Self.FK_SystemDeTutorat_Competence" FromRole="LiaisonCompetence" ToRole="Competence" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_SystemDeTutorat_Employe" FromRole="LiaisonCompetence" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="Membre">
+          <Key>
+            <PropertyRef Name="Id_Groupe" />
+            <PropertyRef Name="Id_Employe" />
+          </Key>
+          <Property Name="Id_Groupe" Type="Int32" Nullable="false" />
+          <Property Name="Id_Employe" Type="Int32" Nullable="false" />
+          <Property Name="EstTutorant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Membre_Employe" FromRole="Membre" ToRole="Employe" />
+          <NavigationProperty Name="Groupe" Relationship="Self.FK_Membre_Groupe" FromRole="Membre" ToRole="Groupe" />
+        </EntityType>
+        <EntityType Name="Messagerie">
+          <Key>
+            <PropertyRef Name="Id_Message" />
+          </Key>
+          <Property Name="Id_Message" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Groupe" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Contenu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groupe" Relationship="Self.FK_Messagerie_Groupe" FromRole="Messagerie" ToRole="Groupe" />
+          <Property Name="Id_Expediteur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employe" Relationship="Model.FK_Messagerie_Employe" FromRole="Messagerie" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id_Tutore" />
+            <PropertyRef Name="Id_Tuteur" />
+            <PropertyRef Name="Id_Competence" />
+          </Key>
+          <Property Name="Id_Tutore" Type="Int32" Nullable="false" />
+          <Property Name="Id_Tuteur" Type="Int32" Nullable="false" />
+          <Property Name="Id_Competence" Type="Int32" Nullable="false" />
+          <Property Name="Note1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competence" Relationship="Self.FK_Note_Competence" FromRole="Note" ToRole="Competence" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Note_EmployeTuteur" FromRole="Note" ToRole="Employe" />
+          <NavigationProperty Name="Employe1" Relationship="Self.FK_Note_EmployeTutore" FromRole="Note" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Categorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Categorie1" Type="Self.Categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Principal>
+            <Dependent Role="Categorie1">
+              <PropertyRef Name="Id_Super_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCategorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="IntituleCategorie" Type="Self.IntituleCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Principal>
+            <Dependent Role="IntituleCategorie">
+              <PropertyRef Name="Id_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competence_CompetenceActuel">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="0..1" />
+          <End Role="Competence1" Type="Self.Competence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Competence1">
+              <PropertyRef Name="Id_CompetenceActuel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groupe_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="0..1" />
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Groupe">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCompetence_Competence1">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="IntituleCompetence" Type="Self.IntituleCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="IntituleCompetence">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemDeTutorat_Competence">
+          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+          <End Role="LiaisonCompetence" Type="Self.LiaisonCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competence">
+              <PropertyRef Name="Id_Competence" />
+            </Principal>
+            <Dependent Role="LiaisonCompetence">
+              <PropertyRef Name="Id_Competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_DuTuteur">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_DuTuteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguePossede_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="LanguePossede" Type="Self.LanguePossede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="LanguePossede">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membre_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Membre" Type="Self.Membre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Membre">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_EmployeTuteur">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Tuteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note_EmployeTutore">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Id_Tutore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemDeTutorat_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="LiaisonCompetence" Type="Self.LiaisonCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="LiaisonCompetence">
+              <PropertyRef Name="Id_Employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membre_Groupe">
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="1" />
+          <End Role="Membre" Type="Self.Membre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="Id_Groupe" />
+            </Principal>
+            <Dependent Role="Membre">
+              <PropertyRef Name="Id_Groupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messagerie_Groupe">
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="Id_Groupe" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="Id_Groupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCategorie_Langue">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="IntituleCategorie" Type="Self.IntituleCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="IntituleCategorie">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntituleCompetence_Langue1">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="IntituleCompetence" Type="Self.IntituleCompetence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="IntituleCompetence">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguePossede_Langue">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="LanguePossede" Type="Self.LanguePossede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="Id_Langue" />
+            </Principal>
+            <Dependent Role="LanguePossede">
+              <PropertyRef Name="Id_Langue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LiaisonCategorieMultiple">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="*" />
+          <End Role="Competence" Type="Self.Competence" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BBD_projetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Competences" EntityType="Self.Competence" />
+          <EntitySet Name="Demandes" EntityType="Self.Demande" />
+          <EntitySet Name="Employes" EntityType="Self.Employe" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
+          <EntitySet Name="IntituleCategories" EntityType="Self.IntituleCategorie" />
+          <EntitySet Name="IntituleCompetences" EntityType="Self.IntituleCompetence" />
+          <EntitySet Name="Langues" EntityType="Self.Langue" />
+          <EntitySet Name="LanguePossedes" EntityType="Self.LanguePossede" />
+          <EntitySet Name="LiaisonCompetences" EntityType="Self.LiaisonCompetence" />
+          <EntitySet Name="Membres" EntityType="Self.Membre" />
+          <EntitySet Name="Messageries" EntityType="Self.Messagerie" />
+          <EntitySet Name="Notes" EntityType="Self.Note" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Categorie_Categorie" Association="Self.FK_Categorie_Categorie">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Categorie1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCategorie_Categorie" Association="Self.FK_IntituleCategorie_Categorie">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="IntituleCategorie" EntitySet="IntituleCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competence_CompetenceActuel" Association="Self.FK_Competence_CompetenceActuel">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="Competence1" EntitySet="Competences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Competence" Association="Self.FK_Demande_Competence">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groupe_Competence" Association="Self.FK_Groupe_Competence">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="Groupe" EntitySet="Groupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCompetence_Competence1" Association="Self.FK_IntituleCompetence_Competence1">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="IntituleCompetence" EntitySet="IntituleCompetences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_Competence" Association="Self.FK_Note_Competence">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemDeTutorat_Competence" Association="Self.FK_SystemDeTutorat_Competence">
+            <End Role="Competence" EntitySet="Competences" />
+            <End Role="LiaisonCompetence" EntitySet="LiaisonCompetences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_DuTuteur" Association="Self.FK_Demande_DuTuteur">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Employe" Association="Self.FK_Demande_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguePossede_Employe" Association="Self.FK_LanguePossede_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="LanguePossede" EntitySet="LanguePossedes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membre_Employe" Association="Self.FK_Membre_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Membre" EntitySet="Membres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_EmployeTuteur" Association="Self.FK_Note_EmployeTuteur">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note_EmployeTutore" Association="Self.FK_Note_EmployeTutore">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemDeTutorat_Employe" Association="Self.FK_SystemDeTutorat_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="LiaisonCompetence" EntitySet="LiaisonCompetences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membre_Groupe" Association="Self.FK_Membre_Groupe">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="Membre" EntitySet="Membres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Groupe" Association="Self.FK_Messagerie_Groupe">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="Messagerie" EntitySet="Messageries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCategorie_Langue" Association="Self.FK_IntituleCategorie_Langue">
+            <End Role="Langue" EntitySet="Langues" />
+            <End Role="IntituleCategorie" EntitySet="IntituleCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntituleCompetence_Langue1" Association="Self.FK_IntituleCompetence_Langue1">
+            <End Role="Langue" EntitySet="Langues" />
+            <End Role="IntituleCompetence" EntitySet="IntituleCompetences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguePossede_Langue" Association="Self.FK_LanguePossede_Langue">
+            <End Role="Langue" EntitySet="Langues" />
+            <End Role="LanguePossede" EntitySet="LanguePossedes" />
+          </AssociationSet>
+          <AssociationSet Name="LiaisonCategorieMultiple" Association="Self.LiaisonCategorieMultiple">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Competence" EntitySet="Competences" />
+          </AssociationSet>
+          <FunctionImport Name="CompCategorie" IsComposable="true" ReturnType="Collection(Model.CompCategorie_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="Idlangue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Demandeur" IsComposable="true" ReturnType="Collection(Model.Demandeur_Result)">
+          <Parameter Name="IdLangue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DemandeurParCompetennceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(Model.DemandeurParCompetennceAvecLangueEtIntituleActu_Result)">
+            <Parameter Name="IdComp" Mode="In" Type="Int32" />
+            <Parameter Name="IdLangue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Offrant" IsComposable="true" ReturnType="Collection(Model.Offrant_Result)">
+          <Parameter Name="IdLangue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="OffrantParCompetenceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(Model.OffrantParCompetenceAvecLangueEtIntituleActu_Result)">
+            <Parameter Name="IdComp" Mode="In" Type="Int32" />
+            <Parameter Name="IdLangue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_Messagerie_Employe" Association="Model.FK_Messagerie_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Messagerie" EntitySet="Messageries" />
+          </AssociationSet>
+          <FunctionImport Name="GroupeMessagerie" IsComposable="true" ReturnType="Collection(Model.GroupeMessagerie_Result)">
+          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MembresGroupe" IsComposable="true" ReturnType="Collection(Model.MembresGroupe_Result)">
+          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_Messagerie_Employe">
+          <End Type="Model.Employe" Role="Employe" Multiplicity="1" />
+          <End Type="Model.Messagerie" Role="Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="Id_Expediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GroupeMessagerie_Result">
+          <Property Type="Int32" Name="Id_Expediteur" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Prénom" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="10" />
+          <Property Type="String" Name="Contenu" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="MembresGroupe_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Statut" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="BBD_projetEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Model.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categorie" />
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Id_Super_Categorie" ColumnName="Id_Super_Categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competences">
+            <EntityTypeMapping TypeName="Model.Competence">
+              <MappingFragment StoreEntitySet="Competence">
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Actuel" ColumnName="Actuel" />
+                <ScalarProperty Name="Id_CompetenceActuel" ColumnName="Id_CompetenceActuel" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="Actif" ColumnName="Actif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demandes">
+            <EntityTypeMapping TypeName="Model.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Id_DuTuteur" ColumnName="Id_DuTuteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employes">
+            <EntityTypeMapping TypeName="Model.Employe">
+              <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="AdresseMail" ColumnName="AdresseMail" />
+                <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
+                <ScalarProperty Name="EstInterne" ColumnName="EstInterne" />
+                <ScalarProperty Name="Metier" ColumnName="Metier" />
+                <ScalarProperty Name="LienLinkedin" ColumnName="LienLinkedin" />
+                <ScalarProperty Name="EstAdmin" ColumnName="EstAdmin" />
+                <ScalarProperty Name="EstChefDeService" ColumnName="EstChefDeService" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="DateArrive" ColumnName="DateArrive" />
+                <ScalarProperty Name="DateDepart" ColumnName="DateDepart" />
+                <ScalarProperty Name="Actif" ColumnName="Actif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groupes">
+            <EntityTypeMapping TypeName="Model.Groupe">
+              <MappingFragment StoreEntitySet="Groupe">
+                <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="EstValider" ColumnName="EstValider" />
+                <ScalarProperty Name="DateReunion" ColumnName="DateReunion" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntituleCategories">
+            <EntityTypeMapping TypeName="Model.IntituleCategorie">
+              <MappingFragment StoreEntitySet="IntituleCategorie">
+                <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categorie" />
+                <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
+                <ScalarProperty Name="intitule" ColumnName="intitule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntituleCompetences">
+            <EntityTypeMapping TypeName="Model.IntituleCompetence">
+              <MappingFragment StoreEntitySet="IntituleCompetence">
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
+                <ScalarProperty Name="intitule" ColumnName="intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Langues">
+            <EntityTypeMapping TypeName="Model.Langue">
+              <MappingFragment StoreEntitySet="Langue">
+                <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Default" ColumnName="Default" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguePossedes">
+            <EntityTypeMapping TypeName="Model.LanguePossede">
+              <MappingFragment StoreEntitySet="LanguePossede">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
+                <ScalarProperty Name="Default" ColumnName="Default" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiaisonCompetences">
+            <EntityTypeMapping TypeName="Model.LiaisonCompetence">
+              <MappingFragment StoreEntitySet="LiaisonCompetence">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="EstTutorant" ColumnName="EstTutorant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Membres">
+            <EntityTypeMapping TypeName="Model.Membre">
+              <MappingFragment StoreEntitySet="Membre">
+                <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="EstTutorant" ColumnName="EstTutorant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messageries">
+            <EntityTypeMapping TypeName="Model.Messagerie">
+              <MappingFragment StoreEntitySet="Messagerie">
+                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
+                <ScalarProperty Name="Id_Message" ColumnName="Id_Message" />
+                <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="Model.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Id_Tutore" ColumnName="Id_Tutore" />
+                <ScalarProperty Name="Id_Tuteur" ColumnName="Id_Tuteur" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Note1" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LiaisonCategorieMultiple" TypeName="Model.LiaisonCategorieMultiple" StoreEntitySet="LiaisonCategorieMultiple">
+            <EndProperty Name="Categorie">
+              <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categoire" />
+            </EndProperty>
+            <EndProperty Name="Competence">
+              <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="Model.Store.CompCategorie" FunctionImportName="CompCategorie">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.CompCategorie_Result">
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Model.Store.Demandeur" FunctionImportName="Demandeur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.Demandeur_Result">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Tutorant" ColumnName="Tutorant" />
+                <ScalarProperty Name="NomTutorant" ColumnName="NomTutorant" />
+                <ScalarProperty Name="PrenomTutorant" ColumnName="PrenomTutorant" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Model.Store.DemandeurParCompetennceAvecLangueEtIntituleActu" FunctionImportName="DemandeurParCompetennceAvecLangueEtIntituleActu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.DemandeurParCompetennceAvecLangueEtIntituleActu_Result">
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Model.Store.Offrant" FunctionImportName="Offrant">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.Offrant_Result">
+                <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Model.Store.OffrantParCompetenceAvecLangueEtIntituleActu" FunctionImportName="OffrantParCompetenceAvecLangueEtIntituleActu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.OffrantParCompetenceAvecLangueEtIntituleActu_Result">
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Intitule" ColumnName="Intitule" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="GroupeMessagerie" FunctionName="Model.Store.GroupeMessagerie">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GroupeMessagerie_Result">
+                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MembresGroupe" FunctionName="Model.Store.MembresGroupe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.MembresGroupe_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
