@@ -30,12 +30,17 @@ namespace ApplicationMarcassin
         public ModificationGroupe(BO.Groupe groupe)
         {
             InitializeComponent();
+            Date.BlackoutDates.Add(new CalendarDateRange(new DateTime(1990, 1, 1),
+            DateTime.Now.AddDays(-1)));
+            System.Diagnostics.Debug.WriteLine(groupe.Id_Groupe);
             using (var db = new BBD_projetEntities())
             {
                 Groupe = groupe;
                 Titre.Text = groupe.Titre;
                 ListBoxTuteur.ItemsSource = groupe.Participant;
                 Tuteur = groupe.Tuteur;
+                System.Diagnostics.Debug.WriteLine(Tuteur.Nom);
+
                 var val = db.LangueParDefaut();
                 var participant = from employe in db.Employes
                                   select new BO.Employe
@@ -58,7 +63,10 @@ namespace ApplicationMarcassin
                                  };
                 var wow = competence.ToList();
                 var ListDeParticipant = participant.ToList();
-                Date.SelectedDate = groupe.DateReunion;
+                System.Diagnostics.Debug.WriteLine(groupe.DateReunion);
+
+                if ( DateTime.Now < groupe.DateReunion)
+                    Date.SelectedDate = groupe.DateReunion;
 
                 //Competence
                 ListViewCompetence.ItemsSource = competence.ToList();
@@ -78,7 +86,7 @@ namespace ApplicationMarcassin
                 {
                     var Nouveauparticipant = ((BO.Employe)ListViewParticipant.SelectedItem);
                     var verifdoublons = 0;
-                    foreach (var x in ListParticipant)
+                    foreach (var x in groupe.Participant)
                     {
                         if (x.Id_Employe == Nouveauparticipant.Id_Employe)
                         {
@@ -88,7 +96,7 @@ namespace ApplicationMarcassin
 
                     if (verifdoublons == 0)
                     {
-                        ListParticipant.Add(Nouveauparticipant);
+                        groupe.Participant.Add(Nouveauparticipant);
                         foreach (var x in ListBoxTuteur.ItemsSource)
                         {
                             System.Diagnostics.Debug.WriteLine(((BO.Employe)x).Nom);
@@ -97,7 +105,10 @@ namespace ApplicationMarcassin
                     }
                 };
                 //Tuteur
-                ListBoxTuteur.SelectedIndex = ListDeParticipant.IndexOf(ListDeParticipant.Where(c => c.Id_Employe == Tuteur.Id_Employe).FirstOrDefault());
+                System.Diagnostics.Debug.WriteLine(Groupe.Participant.IndexOf(Groupe.Participant.Where(c => c.Id_Employe == Tuteur.Id_Employe).FirstOrDefault()));
+                if(Tuteur != null)
+                    ListBoxTuteur.SelectedIndex = Groupe.Participant.IndexOf(Groupe.Participant.Where(c => c.Id_Employe == Tuteur.Id_Employe).FirstOrDefault());
+
                 ListBoxTuteur.SelectionChanged += (sender, e) =>
                 {
                     Tuteur = ((BO.Employe)ListBoxTuteur.SelectedItem);
@@ -108,7 +119,7 @@ namespace ApplicationMarcassin
         {
             using (var db = new BBD_projetEntities())
             {
-                if (Date.SelectedDate == null)
+                if (Date.SelectedDate == null && Groupe.DateReunion == null)
                 {
                     MessageBoxResult result = MessageBox.Show("Error : Aucune date sélectionnée");
                 }
@@ -125,6 +136,8 @@ namespace ApplicationMarcassin
                     System.Diagnostics.Debug.WriteLine(Competence.Id_Competence);
                     //Groupe
                     var DALGroupe = db.Groupes.Find(Groupe.Id_Groupe);
+                    System.Diagnostics.Debug.WriteLine(Groupe.Id_Groupe);
+                    System.Diagnostics.Debug.WriteLine(DALGroupe);
                     DALGroupe.Id_Competence = Competence.Id_Competence;
                     if(Date.SelectedDate != null && Date.SelectedDate != Groupe.DateReunion)
                         DALGroupe.DateReunion = Date.SelectedDate.Value;
@@ -137,19 +150,24 @@ namespace ApplicationMarcassin
 
                     //Membre et tuteur
                     var tuteur = false;
-                    if (ListParticipant.Count <= 0)
+                    if (Groupe.Participant.Count <= 0)
                     {
                         MessageBoxResult result = MessageBox.Show("Warning : Vous n'avez pas de participants");
                     }
-                    var req = from m in db.Membres
+                    var req = (from m in db.Membres
                               where m.Id_Groupe == DALGroupe.Id_Groupe
-                              select new DAL.Membre
+                              select new 
                               {
                                     Id_Groupe = m.Id_Groupe,
                                     Id_Employe = m.Id_Employe,
                                     EstTutorant = m.EstTutorant
-                              };
-                    foreach (var x in ListParticipant)
+                              }).ToList().Select(m => new DAL.Membre
+                              {
+                                  Id_Groupe = m.Id_Groupe,
+                                  Id_Employe = m.Id_Employe,
+                                  EstTutorant = m.EstTutorant
+                              });
+                    foreach (var x in Groupe.Participant)
                     {
                         if (req.Select(c => c.Id_Employe == x.Id_Employe).Count() == 0)
                         {
@@ -181,7 +199,7 @@ namespace ApplicationMarcassin
                     }
                     foreach(var x  in req.ToList())
                     {
-                        if(ListParticipant.Select(c => c.Id_Employe == x.Id_Employe).Count()==0)
+                        if(Groupe.Participant.Select(c => c.Id_Employe == x.Id_Employe).Count()==0)
                         {
                             db.Membres.Remove(x);
                         }
@@ -200,11 +218,11 @@ namespace ApplicationMarcassin
         {
             var x = ((Button)sender).Parent;
             System.Diagnostics.Debug.WriteLine(((Grid)x).Children[2]);
-            foreach (var y in ListParticipant)
+            foreach (var y in Groupe.Participant)
             {
                 if (y.Id_Employe.ToString() == ((Label)((Grid)x).Children[2]).Content.ToString())
                 {
-                    ListParticipant.Remove(y);
+                    Groupe.Participant.Remove(y);
                     ListBoxTuteur.Items.Refresh();
                     break;
                 }

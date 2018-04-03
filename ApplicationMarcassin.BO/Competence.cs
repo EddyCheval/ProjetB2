@@ -9,6 +9,15 @@ namespace ApplicationMarcassin.BO
 {
     public class Competence
     {
+        public static List<Competence> ListDalToBO(List<DAL.Competence> DALlist)
+        {
+            List<BO.Competence> BOList = new List<BO.Competence>();
+            foreach (var x in DALlist)
+            {
+                BOList.Add(new Competence(x));
+            }
+            return BOList;
+        }
         public Competence()
         {
 

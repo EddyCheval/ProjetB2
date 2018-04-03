@@ -41,13 +41,17 @@ namespace ApplicationMarcassin
                               Titre = g.Titre
                           });
                 var list = BO.Groupe.ListDalToBO(req.ToList());
+                foreach(var x in list)
+                {
+                    System.Diagnostics.Debug.WriteLine(x.Id_Groupe);
+                }
                 List.ItemsSource = list;
             }
         }
 
         private void List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            System.Diagnostics.Debug.WriteLine(((BO.Groupe)List.SelectedItem).Id_Groupe);
             NavigationService.Navigate((new ModificationGroupe(((BO.Groupe)List.SelectedItem))));
         }
     }

@@ -187,7 +187,7 @@ namespace ApplicationMarcassin
                             {
                                 EstTutorant = true,
                                 Id_Employe = x.Id_Employe,
-                                Groupe = groupe
+                                //Groupe = groupe
                             };
                         }
                         else
@@ -196,7 +196,7 @@ namespace ApplicationMarcassin
                             {
                                 EstTutorant = false,
                                 Id_Employe = x.Id_Employe,
-                                Groupe = groupe
+                                //Groupe = groupe
                             };
                         }
                         System.Diagnostics.Debug.WriteLine(membre.EstTutorant);

@@ -126,10 +126,13 @@ namespace ApplicationMarcassin
                 //nav.Navigate(new Uri("CreateCompetence.xaml",UriKind.Relative));
                 //nav.Navigate(new Uri("Groupe.xaml", UriKind.Relative));
                 // nav.Navigate(new ModificationCompetence(list[3]));
-                nav.Navigate(new ListViewGroup());
+                //nav.Navigate(new ListViewGroup());
                 //nav.Navigate(new ListViewCompetence());
+                // nav.Navigate(new ListViewEmploye());
+                //nav.Navigate(new CreationEmploye());
+                nav.Navigate(new Menu());
             }
-            }
+        }
         }
     /*
         

@@ -49,6 +49,7 @@ namespace ApplicationMarcassin.BO
 
                 Titre = groupe.Titre;
                 DateReunion = groupe.DateReunion;
+                Id_Groupe = groupe.Id_Groupe;
                 if(groupe.Id_Competence != null)
                     Id_Competence = groupe.Id_Competence.Value;
                 NbParticipant = reqNbParticipant.ToList().Count;

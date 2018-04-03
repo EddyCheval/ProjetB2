@@ -1,0 +1,116 @@
+﻿<Page x:Class="ApplicationMarcassin.ModificationEmploye"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationMarcassin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ModificationEmploye">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Nom-->
+        <Label Content="Nom" Grid.Column="1" Grid.Row="1"/>
+        <TextBox x:Name="Nom" Text="Nom" Grid.Column="2" Grid.Row="1"/>
+
+        <!--Prenom-->
+        <Label Content="Prenom" Grid.Column="4" Grid.Row="1"/>
+        <TextBox  x:Name="Prenom" Text="Prenom" Grid.Column="5" Grid.Row="1"/>
+
+        <!--Service-->
+        <Label Content="Service" Grid.Column="1" Grid.Row="2"/>
+        <TextBox  x:Name="Service" Text="Service" Grid.Column="2" Grid.Row="2"/>
+
+        <!--AdresseMail-->
+        <Label Content="Adresse Mail" Grid.Column="4" Grid.Row="2"/>
+        <TextBox  x:Name="AdresseMail" Text="Adresse Mail" Grid.Column="5" Grid.Row="2"/>
+
+        <!--Entreprise-->
+        <Label Content="Entreprise" Grid.Column="1" Grid.Row="3"/>
+        <TextBox  x:Name="Entreprise" Text="Entreprise" Grid.Column="2" Grid.Row="3"/>
+
+        <!--Date d'arrivée & Date de départ-->
+        <Label Content="Date d'arrivée" Grid.Column="1" Grid.Row="4"/>
+        <DatePicker x:Name="DateArrivee"  Grid.Column="2" Grid.Row="4" />
+
+        <Label Content="Date départ (facultatif)" Grid.Column="1" Grid.Row="5"/>
+        <DatePicker  x:Name="DateDepart" Grid.Column="2" Grid.Row="5" />
+
+        <!--Booléens-->
+        <Label Content="Interne" Grid.Column="4" Grid.Row="3"/>
+        <CheckBox  x:Name="Interne" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+
+        <Label Content="Admin" Grid.Column="4" Grid.Row="4"/>
+        <CheckBox  x:Name="Admin" Grid.Column="4" Grid.Row="4" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+
+        <Label Content="Chef de Service" Grid.Column="4" Grid.Row="5"/>
+        <CheckBox  x:Name="ChefDeService" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+
+        <Label Content="Actif" Grid.Column="4" Grid.Row="6"/>
+        <CheckBox  x:Name="Actif" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+
+        <Label Content="Langue" Grid.Column="5" Grid.Row="3"/>
+        <ListBox x:Name="ListBoxLangue" Grid.Column="6" Grid.Row="3"/>
+        <Label Content="Selection actuel" Grid.Column="5" Grid.Row="4"/>
+        <Button Content="Supprimer" x:Name="SuppressionLangue"  Grid.Column="5" Grid.Row="4" VerticalAlignment="Center" Click="SuppressionLangue_Click"/>
+        <ListBox x:Name="ListBoxLangueSelection" Grid.Column="6" Grid.Row="4"/>
+
+
+        <Label Content="Competence" Grid.Column="5" Grid.Row="5"/>
+        <ListView x:Name="ListViewCompetence" Grid.Column="6" Grid.Row="5">
+            <ListView.View>
+
+                <GridView AllowsColumnReorder="true"
+                     ColumnHeaderToolTip="Competence Information">
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Annee}" 
+                      Header="Année" Width="50"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=IntituleCompetence}" 
+                      Width="90" Header="Intitule"/>
+
+                    <GridViewColumn DisplayMemberBinding=
+                          "{Binding Path=Id_Competence}" 
+                      Header="Id" Width="25"/>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <Label Content="Selection Actuel" Grid.Column="5" Grid.Row="6"/>
+        <Button Click="SuppresionCompetence_Click" VerticalAlignment="Center" Content="Supprimer" x:Name="SuppresionCompetence" Grid.Column="5" Grid.Row="6"/>
+        <ListBox  x:Name="ListBoxCompetence" Grid.Column="6" Grid.Row="6"/>
+
+        <!--LinkedIn-->
+        <Label Content="LinkedIn" Grid.Column="1" Grid.Row="6"/>
+        <TextBox x:Name="LinkedIn" Text="LinkedIn" Grid.Column="2" Grid.Row="6"/>
+
+        <!--Metier-->
+        <Label Content="Metier" Grid.Column="1" Grid.Row="7"/>
+        <TextBox  x:Name="Metier" Text="Metier" Grid.Column="2" Grid.Row="7"/>
+
+        <Button x:Name="Confirmer" Content="Confirmer" Click="Confirmer_Click"  Grid.Column="4" Grid.Row="7" />
+    </Grid>
+</Page>

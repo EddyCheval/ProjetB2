@@ -16,6 +16,10 @@
                      ColumnHeaderToolTip="Groupe Information">
 
                     <GridViewColumn DisplayMemberBinding=
+                          "{Binding Id_Groupe}" 
+                      Header="Id_Groupe" Width="100"/>
+
+                    <GridViewColumn DisplayMemberBinding=
                           "{Binding Titre}" 
                       Header="Titre" Width="100"/>
 

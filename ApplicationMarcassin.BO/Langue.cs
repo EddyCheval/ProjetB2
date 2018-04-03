@@ -17,7 +17,11 @@ namespace ApplicationMarcassin.BO
                 ListBo.Add(new Langue(x));
             }
             return ListBo;
-        } 
+        }
+        public Langue()
+        {
+
+        }
         public Langue(ApplicationMarcassin.DAL.Langue langue)
         {
             this.Nom = langue.Nom;
