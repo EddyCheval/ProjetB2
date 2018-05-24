@@ -1,0 +1,53 @@
+﻿<Page x:Class="ApplicationMarcassin.CreateCategorie"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationMarcassin"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="CreateCategorie"
+      Background="#ecf0f1">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" Content="Création des catégories" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#FCA324"/>
+        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Intitulé" Margin="100 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Name="NewCategorie" Width="250" Height="35" Margin="100 0 0 0"></TextBox>
+
+        <ListView SelectedItem="{Binding Select}" x:Name="listCategorieDal" Grid.Column="1" Grid.Row="2" Width="500">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="490" Header="Choix de la super catégorie" DisplayMemberBinding="{Binding Intitule}">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView SelectedItem="{Binding Select}" x:Name="listLangueDal" Grid.Column="1" Grid.Row="4" Width="500">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="490" Header="Choix de la Langue" DisplayMemberBinding="{Binding Nom}">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Ajouter" Click="ToggleButton_Click" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+    </Grid>
+</Page>

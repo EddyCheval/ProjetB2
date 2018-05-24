@@ -1,0 +1,33 @@
+﻿<Page x:Class="ApplicationMarcassin.ModificationLangue"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationMarcassin"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ModificationLangue"
+      Background="#ecf0f1">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" Grid.Row="0" Content="Modification des langues" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#FCA324"/>
+
+        <Label Grid.Column="1" Grid.Row="1" Content="Intitulé" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 200 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="NewLangue" Width="250" Height="35" VerticalAlignment="Center" Margin="150 0 0 0"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Par défaut" FontSize="18" Foreground="#FCA324" Margin="0 100 200 0"/>
+        <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="NewDefault" Margin="0 105 85 0"/>
+
+        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Modifier" Click="ToggleButton_Click" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+    </Grid>
+</Page>
