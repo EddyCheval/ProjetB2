@@ -52,6 +52,7 @@ namespace ApplicationMarcassin
             ChefDeService.IsChecked = Employe.EstChefDeService;
             Admin.IsChecked = Employe.EstAdmin;
             Actif.IsChecked = Employe.Actif;
+            Interne.IsChecked = Employe.EstInterne;
             AdresseMail.Text = Employe.AdresseMail;
             using (var db = new BBD_projetEntities())
             {
@@ -164,6 +165,10 @@ namespace ApplicationMarcassin
             else if (DateDepart.SelectedDate < DateArrivee.SelectedDate)
             {
                 MessageBoxResult result = MessageBox.Show("Error : Incohérence dans les dates");
+            }
+            else if((!(Interne.IsChecked.Value) && ChefDeService.IsChecked.Value))
+            {
+                MessageBoxResult result = MessageBox.Show("Error : Incohérence des rôles (Impossible d'être externe et chef de service");
             }
             else
             {

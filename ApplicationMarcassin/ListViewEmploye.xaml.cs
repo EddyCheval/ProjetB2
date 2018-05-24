@@ -39,8 +39,8 @@ namespace ApplicationMarcassin
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            NavigationService.Navigate((new ModificationEmploye(((BO.Employe)list.SelectedItem))));
+            if(((BO.Employe)list.SelectedItem) != null)
+                NavigationService.Navigate((new ModificationEmploye(((BO.Employe)list.SelectedItem))));
         }
 
         private void Suppression_Click(object sender, RoutedEventArgs e)
@@ -49,6 +49,13 @@ namespace ApplicationMarcassin
             {
                 if (list.SelectedItem != null)
                 {
+                    var DALObject4 = (from m in db.Membres
+                                      where m.Id_Employe == ((BO.Employe)list.SelectedItem).Id_Employe
+                                      select m).ToList();
+                    foreach(var w in DALObject4)
+                    {
+                        db.Membres.Remove(w);
+                    }
                     var DALObject3 = (from lc in db.LiaisonCompetences
                                       where lc.Id_Employe == ((BO.Employe)list.SelectedItem).Id_Employe
                                       select lc).ToList();
@@ -61,7 +68,7 @@ namespace ApplicationMarcassin
                                       select lp).ToList();
                     foreach(var x in DALObject2)
                     {
-                        //db.LanguePossedes.Remove(x);
+                        db.LanguePossedes.Remove(x);
                     }
                     var DALObject = (from e2 in db.Employes
                                     where e2.Id_Employe == ((BO.Employe)list.SelectedItem).Id_Employe
@@ -73,6 +80,11 @@ namespace ApplicationMarcassin
                 db.SaveChanges();
 
             }
+        }
+
+        private void Creation_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CreationEmploye());
         }
     }
 }

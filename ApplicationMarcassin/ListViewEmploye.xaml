@@ -5,43 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListViewEmploye">
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ListViewEmploye"
+      Background="#ecf0f1">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" Grid.Row="0" Content="Liste des employés" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#FCA324"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" Width="800" Height="500">
+            <ListView MouseDoubleClick="list_MouseDoubleClick" SelectedItem="{Binding Select}" Height="450" x:Name="list">
+                <ListView.View>
 
-    <StackPanel>
-        <ListView MouseDoubleClick="list_MouseDoubleClick" SelectedItem="{Binding Select}" x:Name="list" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
-            <ListView.View>
-
-                <GridView AllowsColumnReorder="true"
+                    <GridView AllowsColumnReorder="true"
                      ColumnHeaderToolTip="Employe Information">
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Nom}" 
-                      Header="Nom" Width="100"/>
+                      Header="Nom" Width="150"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Prenom}" 
-                      Width="100" Header="Prenom"/>
+                      Width="150" Header="Prenom"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Employe}" 
-                      Header="Id" Width="100"/>
-                    
-                    <GridViewColumn DisplayMemberBinding=
+                      Header="Id" Width="50"/>
+
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Entreprise}" 
-                      Width="100" Header="Entreprise"/>
-                    
-                    <GridViewColumn DisplayMemberBinding=
+                      Width="150" Header="Entreprise"/>
+
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Service}" 
-                      Width="100" Header="Service"/>
+                      Width="150" Header="Service"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Metier}" 
-                      Width="100" Header="Métier"/>
-                </GridView>
+                      Width="150" Header="Métier"/>
+                    </GridView>
 
-            </ListView.View>
-        </ListView>
-        <Button x:Name="Suppression" Content="Supprimer Sélection" Click="Suppression_Click"/>
-    </StackPanel>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Button x:Name="Suppression" Content="Supprimer" Click="Suppression_Click" Grid.Column="1" Grid.Row="2" Margin="150 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Creation" Content="Créer" Click="Creation_Click" Grid.Column="1" Grid.Row="2" Margin="0 0 150 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+    </Grid>
 </Page>

@@ -5,15 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Menu">
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="Menu"
+      Background="#ecf0f1">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.3*"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -24,27 +26,23 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="Competence" Click="Competence_Click" Grid.Column="1" Grid.Row="1" Content="Compétence" Height="50" VerticalAlignment="Center"/>
-        <Button x:Name="Employe" Click="Employe_Click" Grid.Column="2" Grid.Row="1" Content="Employe" Height="50" VerticalAlignment="Center"/>
-        <Button x:Name="Groupe" Click="Groupe_Click"  Grid.Column="3" Grid.Row="1" Content="Groupe" Height="50" VerticalAlignment="Center"/>
-        <Button Grid.Column="4" Grid.Row="1" Content="Catégories" Height="50" VerticalAlignment="Center"/>
-        <Button Grid.Column="5" Grid.Row="1" Content="Langue" Height="50" VerticalAlignment="Center"/>
-        <TextBox x:Name="TextRecherche" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4"/>
-        <Grid Grid.Column="5" Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <ComboBox Grid.Column="0" Grid.Row="0" SelectionChanged="ComboBox_SelectionChanged" x:Name="ComboPicker">
-                <ComboBoxItem Content="Employe"/>
-                <ComboBoxItem Content="Compétence"/>
-                <ComboBoxItem Content="Catégorie"/>
-                <ComboBoxItem Content="Langue"/>
-                <ComboBoxItem Content="Groupe"/>
-            </ComboBox>
-            <Button x:Name="BtnRecherche" Content="Recherche" Click="BtnRecherche_Click" Grid.Row="1" Grid.Column="0"/>
-        </Grid>
-        <ListView x:Name="listViewCompetence" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5">
+        <Label HorizontalAlignment="Center" Content="Marcassin" Grid.Column="3" FontSize="30" Foreground="#FCA324" Margin="0 35 0 0"/>
+        <Button x:Name="Competence" Click="Competence_Click" Grid.Column="1" Grid.Row="1" Content="Compétence" FontSize="18" Foreground="White" Height="50" Background="#FCA324" BorderBrush="#ecf0f1" BorderThickness="2" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Employe" Click="Employe_Click" Grid.Column="2" Grid.Row="1" Content="Employe" FontSize="18" Foreground="White" Height="50" Background="#FCA324" BorderBrush="#ecf0f1" BorderThickness="2" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Groupe" Click="Groupe_Click" Grid.Column="3" Grid.Row="1" Content="Groupe" FontSize="18" Foreground="White" Height="50" Background="#FCA324" BorderBrush="#ecf0f1" BorderThickness="2" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Categorie" Grid.Column="4" Click="Categorie_Click" Grid.Row="1" Content="Catégories" Height="50" FontSize="18" Foreground="White" Background="#FCA324" BorderBrush="#ecf0f1" BorderThickness="2" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Langue" Click="Langue_Click" Grid.Column="5" Grid.Row="1" Content="Langue" Height="50" FontSize="18" Foreground="White" Background="#FCA324" BorderBrush="#ecf0f1" BorderThickness="2" Style="{StaticResource MyButton}"/>
+        <TextBox x:Name="TextRecherche" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="4" BorderBrush="#FCA324" Height="35"/>
+
+        <ComboBox SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1" Grid.Row="2" x:Name="ComboPicker" Height="35" FontSize="18" Foreground="#FCA324" HorizontalContentAlignment="Center">
+            <ComboBoxItem Content="Employe" Foreground="#FCA324" HorizontalAlignment="center"/>
+            <ComboBoxItem Content="Compétence" Foreground="#FCA324" HorizontalAlignment="center"/>
+            <ComboBoxItem Content="Catégorie" Foreground="#FCA324" HorizontalAlignment="center"/>
+            <ComboBoxItem Content="Langue" Foreground="#FCA324" HorizontalAlignment="center"/>
+            <ComboBoxItem Content="Groupe" Foreground="#FCA324" HorizontalAlignment="center"/>
+        </ComboBox>
+        <Button x:Name="BtnRecherche" Click="BtnRecherche_Click" Content="Recherche" Grid.Row="2" Grid.Column="5" Height="35" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <ListView x:Name="listViewCompetence" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -52,19 +50,19 @@
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Annee}" 
-                      Header="Année" Width="100"/>
+                      Header="Année" Width="200"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=IntituleCompetence}" 
-                      Width="300" Header="Intitule"/>
+                      Width="200" Header="Intitule"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Competence}" 
-                      Header="Id" Width="100"/>
+                      Header="Id" Width="200"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView SelectedItem="{Binding Select}" x:Name="listViewEmploye" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5">
+        <ListView SelectedItem="{Binding Select}" x:Name="listViewEmploye" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -72,32 +70,32 @@
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Nom}" 
-                      Header="Nom" Width="100"/>
+                      Header="Nom" Width="150"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Prenom}" 
-                      Width="100" Header="Prenom"/>
+                      Width="150" Header="Prenom"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Employe}" 
-                      Header="Id" Width="100"/>
+                      Header="Id" Width="150"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Entreprise}" 
-                      Width="100" Header="Entreprise"/>
+                      Width="150" Header="Entreprise"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Service}" 
-                      Width="100" Header="Service"/>
+                      Width="150" Header="Service"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Metier}" 
-                      Width="100" Header="Métier"/>
+                      Width="150" Header="Métier"/>
                 </GridView>
 
             </ListView.View>
         </ListView>
-        <ListView SelectedItem="{Binding Select}" x:Name="listViewGroupe" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5">
+        <ListView SelectedItem="{Binding Select}" x:Name="listViewGroupe" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -105,28 +103,29 @@
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Id_Groupe}" 
-                      Header="Id_Groupe" Width="100"/>
+                      Header="Id_Groupe" Width="150"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Titre}" 
-                      Header="Titre" Width="100"/>
+                      Header="Titre" Width="150"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Tuteur.Nom}" 
-                      Width="100" Header="Nom du Tuteur"/>
+                      Width="150" Header="Nom du Tuteur"/>
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Tuteur.Prenom}" 
-                      Width="100" Header="Prenom du Tuteur"/>
+                      Width="150" Header="Prenom du Tuteur"/>
 
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Competence}" 
-                      Header="Compétence Tutoré" Width="100"/>
+                      Header="Compétence Tutoré" Width="150"/>
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=NbParticipant}" 
-                      Header="Nombre de participant" Width="100"/>
+                      Header="Nombre de participant" Width="150"/>
                 </GridView>
 
             </ListView.View>
         </ListView>
+
     </Grid>
 </Page>

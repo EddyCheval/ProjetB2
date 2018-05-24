@@ -63,70 +63,82 @@ namespace ApplicationMarcassin
                                IntituleCompetence = c.IntituleCompetences.Where(b => b.Id_Langue == val).Select(b => b.intitule).FirstOrDefault(),
                                Annee = c.Annee,
                                Id_Competence = c.Id_Competence,
-                               Id_CompetenceActuel = c.Id_CompetenceActuel};
-
+                               Id_CompetenceActuel = c.Id_CompetenceActuel
+                           };
+                list.SelectedIndex = List.IndexOf(List.Where(c => c.Id_Langue == val).Select(c => c).FirstOrDefault());
                 list2.ItemsSource = req3.ToList();
+                C3.SelectedDate = DateTime.Now;
                 
             }
         }
         private void b_Click(object sender, RoutedEventArgs e)
         {
-            //lier les eux objets
-            using (var db = new BBD_projetEntities())
+            if (C3.SelectedDate == null)
             {
-                BO.Competence t = (BO.Competence)list2.SelectedItem;
-                DAL.Competence objet = null;
-                test2.Content = Actif.ToString();
-                var objet2 = new DAL.IntituleCompetence();
+                MessageBoxResult result = MessageBox.Show("Error : Aucune date sélectionnée");
+            }
+            else if (StringCheck(C1.Text) && StringCheck(C2.Text))
+            {
+                MessageBoxResult result = MessageBox.Show("Error : Aucun Titre sélectionné");
+            }
+            else
+            {
+                //lier les eux objets
+                using (var db = new BBD_projetEntities())
+                {
+                    BO.Competence t = (BO.Competence)list2.SelectedItem;
+                    DAL.Competence objet = null;
+                    test2.Content = Actif.ToString();
+                    var objet2 = new DAL.IntituleCompetence();
 
-                if (list2.SelectedItem != null)
-                {
-                    objet = new DAL.Competence()
+                    if (list2.SelectedItem != null)
                     {
-                        Actuel = this.Actuel,
-                        Id_CompetenceActuel = t.Id_CompetenceActuel,
-                        Annee = C3.SelectedDate.ToString(),
-                        Actif = this.Actif
-                    };
-                }
-                else
-                {
-                    objet = new DAL.Competence()
+                        objet = new DAL.Competence()
+                        {
+                            Actuel = this.Actuel,
+                            Id_CompetenceActuel = t.Id_CompetenceActuel,
+                            Annee = C3.SelectedDate.ToString(),
+                            Actif = this.Actif
+                        };
+                    }
+                    else
                     {
-                        Actuel = this.Actuel,
-                        Id_CompetenceActuel = null,
-                        Annee = C3.SelectedDate.ToString(),
-                        Actif = this.Actif
+                        objet = new DAL.Competence()
+                        {
+                            Actuel = this.Actuel,
+                            Id_CompetenceActuel = null,
+                            Annee = C3.SelectedDate.ToString(),
+                            Actif = this.Actif
 
-                    };
-                }
-                if (list.SelectedItem == null)
-                {
-                    objet2 = new DAL.IntituleCompetence()
+                        };
+                    }
+                    if (list.SelectedItem == null)
                     {
-                        intitule = C1.Text,
-                        Description = C2.Text,
-                        Id_Langue = 3,
-                        Competence = objet
-                    };
-                }
-                else
-                {
-                    objet2 = new DAL.IntituleCompetence()
+                        objet2 = new DAL.IntituleCompetence()
+                        {
+                            intitule = C1.Text,
+                            Description = C2.Text,
+                            Id_Langue = 3,
+                            Competence = objet
+                        };
+                    }
+                    else
                     {
-                        intitule = C1.Text,
-                        Description = C2.Text,
-                        Id_Langue = ((int)list.SelectedValue),
-                        Competence = objet
-                    };
-                }
-               
-                objet.IntituleCompetences.Add(objet2);
-                db.Competences.Add(objet);
-                db.SaveChanges();
-            ListViewCompetence l = new ListViewCompetence();
-            this.NavigationService.Navigate(new Uri("ListViewCompetence.xaml", UriKind.Relative));
+                        objet2 = new DAL.IntituleCompetence()
+                        {
+                            intitule = C1.Text,
+                            Description = C2.Text,
+                            Id_Langue = ((int)list.SelectedValue),
+                            Competence = objet
+                        };
+                    }
 
+                    objet.IntituleCompetences.Add(objet2);
+                    db.Competences.Add(objet);
+                    db.SaveChanges();
+                    ListViewCompetence l = new ListViewCompetence();
+                    this.NavigationService.Navigate(new Uri("ListViewCompetence.xaml", UriKind.Relative));
+                }
         }
     }
 
@@ -140,6 +152,17 @@ namespace ApplicationMarcassin
         {
             Actif = false;
             System.Diagnostics.Debug.Write(false);
+        }
+        private bool StringCheck(string s)
+        {
+            foreach (var x in s)
+            {
+                if (x != ' ')
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

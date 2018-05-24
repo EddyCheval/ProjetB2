@@ -5,18 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="900"
-      Title="CreationEmploye">
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="CreationEmploye"
+      Background="#ecf0f1">
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -29,55 +32,57 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="0" FontSize="30" Foreground="#FCA324">Création employé</Label>
+
         <!--Nom-->
-        <Label Content="Nom" Grid.Column="1" Grid.Row="1"/>
-        <TextBox x:Name="Nom" Text="Nom" Grid.Column="2" Grid.Row="1"/>
+        <Label Content="Nom" Grid.Column="1" Grid.Row="1" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox x:Name="Nom" Text="Nom" Grid.Column="1" Grid.Row="1" Width="100" Height="35" VerticalAlignment="Bottom"/>
 
         <!--Prenom-->
-        <Label Content="Prenom" Grid.Column="4" Grid.Row="1"/>
-        <TextBox  x:Name="Prenom" Text="Prenom" Grid.Column="5" Grid.Row="1"/>
+        <Label Content="Prenom" Grid.Column="2" Grid.Row="1" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox  x:Name="Prenom" Text="Prenom" Grid.Column="2" Grid.Row="1" Width="100" Height="35" VerticalAlignment="Bottom"/>
 
         <!--Service-->
-        <Label Content="Service" Grid.Column="1" Grid.Row="2"/>
-        <TextBox  x:Name="Service" Text="Service" Grid.Column="2" Grid.Row="2"/>
+        <Label Content="Service" Grid.Column="1" Grid.Row="5" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox  x:Name="Service" Text="Service" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Height="35" Width="250" VerticalAlignment="Bottom"/>
 
         <!--AdresseMail-->
-        <Label Content="Adresse Mail" Grid.Column="4" Grid.Row="2"/>
-        <TextBox  x:Name="AdresseMail" Text="Adresse Mail" Grid.Column="5" Grid.Row="2"/>
+        <Label Content="Adresse Mail" Grid.Column="1" Grid.Row="2" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox  x:Name="AdresseMail" Text="Adresse Mail" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="250" VerticalAlignment="Bottom"/>
 
         <!--Entreprise-->
-        <Label Content="Entreprise" Grid.Column="1" Grid.Row="3"/>
-        <TextBox  x:Name="Entreprise" Text="Entreprise" Grid.Column="2" Grid.Row="3"/>
-        
+        <Label Content="Entreprise" Grid.Column="1" Grid.Row="3" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox  x:Name="Entreprise" Text="Entreprise" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Height="35" Width="250" VerticalAlignment="Bottom"/>
+
         <!--Date d'arrivée & Date de départ-->
-        <Label Content="Date d'arrivée" Grid.Column="1" Grid.Row="4"/>
-        <DatePicker x:Name="DateArrivee"  Grid.Column="2" Grid.Row="4" />
-        
-        <Label Content="Date départ (facultatif)" Grid.Column="1" Grid.Row="5"/>
-        <DatePicker  x:Name="DateDepart" Grid.Column="2" Grid.Row="5" />
-        
+        <Label Content="Date d'arrivée" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" FontSize="18" Foreground="#FCA324" Margin="20 0 0 0"/>
+        <DatePicker x:Name="DateArrivee"  Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Width="250" Margin="10"/>
+
+        <Label Content="Date départ (facultatif)" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Margin="20 0 0 0" Foreground="#FCA324"/>
+        <DatePicker  x:Name="DateDepart" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Bottom"  Width="250" Margin="10"/>
+
         <!--Booléens-->
-        <Label Content="Interne" Grid.Column="4" Grid.Row="3"/>
-        <CheckBox  x:Name="Interne" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+        <Label Content="Interne" Grid.Column="4" Grid.Row="6" FontSize="18" Foreground="#FCA324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <CheckBox  x:Name="Interne" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,3,0,0"/>
 
-        <Label Content="Admin" Grid.Column="4" Grid.Row="4"/>
-        <CheckBox  x:Name="Admin" Grid.Column="4" Grid.Row="4" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+        <Label Content="Admin" Grid.Column="4" Grid.Row="4" FontSize="18" Foreground="#FCA324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <CheckBox  x:Name="Admin" Grid.Column="3" Grid.Row="4" HorizontalAlignment="center" VerticalAlignment="Center" Margin="20,3,0,0"/>
 
-        <Label Content="Chef de Service" Grid.Column="4" Grid.Row="5"/>
-        <CheckBox  x:Name="ChefDeService" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+        <Label Content="Chef de Service" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="2" FontSize="18" Foreground="#FCA324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <CheckBox  x:Name="ChefDeService" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,3,0,0"/>
 
-        <Label Content="Actif" Grid.Column="4" Grid.Row="6"/>
-        <CheckBox  x:Name="Actif" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Right" Margin="0,5,10,0"/>
+        <Label Content="Actif" Grid.Column="4" Grid.Row="1" FontSize="18" Foreground="#FCA324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <CheckBox  x:Name="Actif" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,3,0,0"/>
 
-        <Label Content="Langue" Grid.Column="5" Grid.Row="3"/>
-        <ListBox x:Name="ListBoxLangue" Grid.Column="6" Grid.Row="3"/>
-        <Label Content="Selection actuel" Grid.Column="5" Grid.Row="4"/>
-        <Button Content="Supprimer" x:Name="SuppressionLangue"  Grid.Column="5" Grid.Row="4" VerticalAlignment="Center" Click="SuppressionLangue_Click"/>
-        <ListBox x:Name="ListBoxLangueSelection" Grid.Column="6" Grid.Row="4"/>
-        
-        
-        <Label Content="Competence" Grid.Column="5" Grid.Row="5"/>
-        <ListView x:Name="ListViewCompetence" Grid.Column="6" Grid.Row="5">
+        <Label Content="Langue" Grid.Column="6" Grid.Row="1" FontSize="18" Foreground="#FCA324"/>
+        <ListBox x:Name="ListBoxLangue" Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" Height="130" Margin="5" VerticalAlignment="Bottom"/>
+        <Label Content="Selection actuelle" Grid.Column="6" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="18" Foreground="#FCA324"/>
+        <Button Content="Supprimer" x:Name="SuppressionLangue"  Grid.Column="6" Grid.Row="5" VerticalAlignment="Bottom" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}" Click="SuppressionLangue_Click"/>
+        <ListBox x:Name="ListBoxLangueSelection" Grid.Column="6" Grid.Row="4" Grid.RowSpan="2" Height="130" VerticalAlignment="Top" Margin="5"/>
+
+
+        <Label Content="Compétence" Grid.Column="7" Grid.Row="1" FontSize="18" Foreground="#FCA324"/>
+        <ListView x:Name="ListViewCompetence" Grid.Column="7" Grid.Row="1" Height="130" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="5">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -98,18 +103,17 @@
 
             </ListView.View>
         </ListView>
-        <Label Content="Selection Actuel" Grid.Column="5" Grid.Row="6"/>
-        <Button Click="SuppresionCompetence_Click" VerticalAlignment="Center" Content="Supprimer" x:Name="SuppresionCompetence" Grid.Column="5" Grid.Row="6"/>
-        <ListBox  x:Name="ListBoxCompetence" Grid.Column="6" Grid.Row="6"/>
+        <Button VerticalAlignment="Bottom" Click="SuppresionCompetence_Click" Content="Supprimer" x:Name="SuppresionCompetence" Grid.Column="7" Grid.Row="5" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <ListBox  x:Name="ListBoxCompetence" Grid.Column="7" Grid.Row="4" Grid.RowSpan="2" VerticalAlignment="Top" Height="130" Margin="5"/>
 
         <!--LinkedIn-->
-        <Label Content="LinkedIn" Grid.Column="1" Grid.Row="6"/>
-        <TextBox x:Name="LinkedIn" Text="LinkedIn" Grid.Column="2" Grid.Row="6"/>
-        
-        <!--Metier-->
-        <Label Content="Metier" Grid.Column="1" Grid.Row="7"/>
-        <TextBox  x:Name="Metier" Text="Metier" Grid.Column="2" Grid.Row="7"/>
+        <Label Content="LinkedIn" Grid.Column="1" Grid.Row="6" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox x:Name="LinkedIn" Text="LinkedIn" Grid.Column="1" Grid.Row="6" Height="35" Width="250" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
 
-        <Button x:Name="Confirmer" Content="Confirmer" Click="Confirmer_Click"  Grid.Column="4" Grid.Row="7" />
+        <!--Metier-->
+        <Label Content="Metier" Grid.Column="1" Grid.Row="4" Margin="18 0 0 0" FontSize="18" Foreground="#FCA324"/>
+        <TextBox  x:Name="Metier" Text="Metier" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Height="35" Width="250" VerticalAlignment="Bottom"/>
+
+        <Button x:Name="Confirmer" Click="Confirmer_Click" Content="Confirmer" Grid.Column="7" Grid.Row="7" Height="35" Width="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
     </Grid>
 </Page>

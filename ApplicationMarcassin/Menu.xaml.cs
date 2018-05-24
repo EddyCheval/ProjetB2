@@ -156,5 +156,16 @@ namespace ApplicationMarcassin
 
             this.NavigationService.Navigate(new Uri("ListViewGroup.xaml", UriKind.Relative));
         }
+        
+
+        private void Categorie_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("ListViewCategorie.xaml", UriKind.Relative));
+        }
+
+        private void Langue_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("ListViewLangue.xaml", UriKind.Relative));
+        }
     }
 }

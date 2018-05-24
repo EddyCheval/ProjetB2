@@ -5,40 +5,55 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListViewGroup">
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ListViewGroup"
+      Background="#ecf0f1">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.10*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" Grid.Row="0" Content="Liste des groupes" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#FCA324"/>
+        <StackPanel Height="500" Grid.Column="1" Grid.Row="1">
+            <ListView MouseDoubleClick="List_MouseDoubleClick" SelectedItem="{Binding Select}" x:Name="List" Height="450">
+                <ListView.View>
 
-    <StackPanel>
-        <ListView MouseDoubleClick="List_MouseDoubleClick" SelectedItem="{Binding Select}" x:Name="List" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
-            <ListView.View>
-
-                <GridView AllowsColumnReorder="true"
+                    <GridView AllowsColumnReorder="true"
                      ColumnHeaderToolTip="Groupe Information">
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Id_Groupe}" 
-                      Header="Id_Groupe" Width="100"/>
+                      Header="Id_Groupe" Width="125"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Titre}" 
-                      Header="Titre" Width="100"/>
+                      Header="Titre" Width="175"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Tuteur.Nom}" 
-                      Width="100" Header="Nom du Tuteur"/>
-                    <GridViewColumn DisplayMemberBinding=
+                      Width="175" Header="Nom du Tuteur"/>
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Tuteur.Prenom}" 
-                      Width="100" Header="Prenom du Tuteur"/>
+                      Width="175" Header="Prenom du Tuteur"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Competence}" 
-                      Header="Compétence Tutoré" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding=
+                      Header="Compétence Tutoré" Width="175"/>
+                        <GridViewColumn  DisplayMemberBinding=
                           "{Binding Path=NbParticipant}" 
-                      Header="Nombre de participant" Width="100"/>
-                </GridView>
+                      Header="Nombre de participant" Width="175"/>
+                    </GridView>
 
-            </ListView.View>
-        </ListView>
-    </StackPanel>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Button x:Name="Suppression" Content="Supprimer" Click="Suppression_Click" Grid.Column="1" Grid.Row="2" Margin="150 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Creation" Content="Créer" Click="Creation_Click" Grid.Column="1" Grid.Row="2" Margin="0 0 150 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+    </Grid>
 </Page>

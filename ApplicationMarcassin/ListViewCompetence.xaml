@@ -5,30 +5,44 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListViewCompetence">
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ListViewCompetence"
+      Background="#ecf0f1">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" Grid.Row="0" Content="Liste des compétences" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#FCA324"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" Width="800" Height="500">
+            <ListView MouseDoubleClick="list_MouseDoubleClick" SelectedItem="{Binding Select}" x:Name="list" Width="800" Height="450" HorizontalAlignment="Center">
+                <ListView.View>
 
-    <StackPanel>
-        <ListView MouseDoubleClick="list_MouseDoubleClick" SelectedItem="{Binding Select}" x:Name="list" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
-            <ListView.View>
-
-                <GridView AllowsColumnReorder="true"
+                    <GridView AllowsColumnReorder="true"
                      ColumnHeaderToolTip="Competence Information">
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Annee}" 
-                      Header="Année" Width="100"/>
+                      Header="Année" Width="300"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=IntituleCompetence}" 
-                      Width="100" Header="Intitule"/>
+                      Width="300" Header="Intitule"/>
 
-                    <GridViewColumn DisplayMemberBinding=
+                        <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id_Competence}" 
-                      Header="Id" Width="100"/>
-                </GridView>
-
-            </ListView.View>
-        </ListView>
-    </StackPanel>
+                      Header="Id" Width="200"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Button x:Name="Suppression" Content="Supprimer" Click="Suppression_Click" Grid.Column="1" Grid.Row="2" Margin="150 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Creation" Content="Créer" Click="Creation_Click" Grid.Column="1" Grid.Row="2" Margin="0 0 150 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+    </Grid>
 </Page>

@@ -39,7 +39,6 @@ namespace ApplicationMarcassin
                 Titre.Text = groupe.Titre;
                 ListBoxTuteur.ItemsSource = groupe.Participant;
                 Tuteur = groupe.Tuteur;
-                System.Diagnostics.Debug.WriteLine(Tuteur.Nom);
 
                 var val = db.LangueParDefaut();
                 var participant = from employe in db.Employes
@@ -169,7 +168,7 @@ namespace ApplicationMarcassin
                               });
                     foreach (var x in Groupe.Participant)
                     {
-                        if (req.Select(c => c.Id_Employe == x.Id_Employe).Count() == 0)
+                        if (req.Where(c => c.Id_Employe == x.Id_Employe).Count() == 0)
                         {
                             var membre = new DAL.Membre();
                             if (x.Id_Employe == Tuteur.Id_Employe)
@@ -199,8 +198,9 @@ namespace ApplicationMarcassin
                     }
                     foreach(var x  in req.ToList())
                     {
-                        if(Groupe.Participant.Select(c => c.Id_Employe == x.Id_Employe).Count()==0)
+                        if(Groupe.Participant.Where(c => c.Id_Employe == x.Id_Employe).Count()==0)
                         {
+                            db.Membres.Attach(x);
                             db.Membres.Remove(x);
                         }
                     }

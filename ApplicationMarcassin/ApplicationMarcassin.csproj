@@ -69,14 +69,23 @@
     <Compile Include="Categorie.xaml.cs">
       <DependentUpon>Categorie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateCategorie.xaml.cs">
+      <DependentUpon>CreateCategorie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateCompetence.xaml.cs">
       <DependentUpon>CreateCompetence.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateLangue.xaml.cs">
+      <DependentUpon>CreateLangue.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreationEmploye.xaml.cs">
       <DependentUpon>CreationEmploye.xaml</DependentUpon>
     </Compile>
     <Compile Include="Groupe.xaml.cs">
       <DependentUpon>Groupe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListViewCategorie.xaml.cs">
+      <DependentUpon>ListViewCategorie.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListViewCompetence.xaml.cs">
       <DependentUpon>ListViewCompetence.xaml</DependentUpon>
@@ -85,7 +94,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateCategorie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateCompetence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateLangue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Groupe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListViewCategorie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListViewGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListViewLangue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,11 +148,18 @@
     <Compile Include="ListViewGroup.xaml.cs">
       <DependentUpon>ListViewGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListViewLangue.xaml.cs">
+      <DependentUpon>ListViewLangue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModificationCategorie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,10 +175,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModificationLangue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModificationCategorie.xaml.cs">
+      <DependentUpon>ModificationCategorie.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModificationCompetence.xaml.cs">
       <DependentUpon>ModificationCompetence.xaml</DependentUpon>
@@ -156,6 +195,9 @@
     </Compile>
     <Compile Include="ModificationGroupe.xaml.cs">
       <DependentUpon>ModificationGroupe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModificationLangue.xaml.cs">
+      <DependentUpon>ModificationLangue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

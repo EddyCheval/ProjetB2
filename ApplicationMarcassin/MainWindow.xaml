@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationMarcassin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="700" Width="1200">
     <StackPanel>
-        <Frame x:Name="Frame"  Width="750" Height="550" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Frame x:Name="Frame"  Width="1200" Height="700" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
     </StackPanel>
 </Window>

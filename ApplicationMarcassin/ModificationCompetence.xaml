@@ -5,47 +5,58 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationMarcassin"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="ModificationCompetence">
-
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ModificationCompetence"
+      Background="#ecf0f1">
 
     <Grid Background="Transparent">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.15*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">Ajout de Compétence</Label>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" FontSize="30" Foreground="#FCA324">Ajout de Compétence</Label>
 
-        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="Intitulé"/>
-        <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="C1">Intitule</TextBox>
+        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Intitulé" FontSize="18" Foreground="#FCA324"/>
+        <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="C1" Width="250" Height="35"></TextBox>
 
-        <Label Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  Content="Date"/>
-        <Calendar VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="4" Grid.Row="2" Grid.RowSpan="1" Grid.ColumnSpan="1" Name="C3" />
+        <Label Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4"  Content="Date" FontSize="18" Foreground="#FCA324"/>
+        <Calendar VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="4" Grid.RowSpan="1" Grid.ColumnSpan="1" Name="C3"/>
 
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Name="LabelDescription" Content="Description"/>
-        <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" x:Name="C2" Grid.Column="2" Grid.Row="2" Text="Description"/>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Name="LabelDescription" Content="Description" FontSize="18" Foreground="#FCA324"/>
+        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="250" Height="130" x:Name="C2" Grid.Column="4" Grid.Row="1"/>
 
 
-        <Label Content="Langue" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <ListBox SelectionChanged="list_SelectionChanged" Name="list" Grid.Column="2" Grid.Row="3">
+        <Label Content="Langue" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="#FCA324"/>
+        <ListBox Name="list" Grid.Column="2" Grid.Row="2" Height="130" Width="250">
         </ListBox>
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="4" Grid.Row="3">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Label VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="CompetenceActuel :"/>
-                <ListBox ItemsSource="{Binding list2}" SelectedItem="{Binding CompetenceActuel}" Name="list2">
+        <Label x:Name="l2" RenderTransformOrigin="0.505,9.3" Height="78"/>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Grid.Column="4" Grid.Row="2" Margin="0 0 0 10" x:Name="c" Content="Enregistrer intitulé" Height="35" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+
+        <Canvas Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4">
+            <Line
+            X1="0" Y1="15"
+            X2="1030" Y2="15"
+            Stroke="#FCA324"
+            StrokeThickness="1"/>
+        </Canvas>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Competence actuelle" FontSize="18" Foreground="#FCA324" Grid.Column="1" Grid.Row="4"/>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="4">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ListBox ItemsSource="{Binding list2}" SelectedItem="{Binding CompetenceActuel}" Name="list2" Width="250" Height="130" HorizontalAlignment="center" VerticalAlignment="Center">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -59,7 +70,7 @@
                 <Label x:Name="test"/>
             </StackPanel>
         </Border>
-        <Border Grid.Column="2" Grid.Row="4">
+        <Border Grid.Column="2" Grid.Row="5">
             <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -69,19 +80,19 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Actif :</Label>
-                <CheckBox Checked="B_Actif_Checked" Unchecked="B_Actif_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="B_Actif">
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="#FCA324">Actif :</Label>
+                <CheckBox  Checked="B_Actif_Checked" Unchecked="B_Actif_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="B_Actif">
 
                 </CheckBox>
                 <Label x:Name="test2"></Label>
-                <Label  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Actuel :</Label>
+                <Label  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="#FCA324">Actuel :</Label>
                 <CheckBox Checked="B_Actuel_Checked" Unchecked="B_Actuel_Unchecked" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="B_Actuel">
 
                 </CheckBox>
             </Grid>
         </Border>
         <Label x:Name="l1" RenderTransformOrigin="0.505,9.3" Height="78"/>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Grid.Column="4" Grid.Row="4" x:Name="b" Click="b_Click" Content="Ok"/>
+        <Button Click="b_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Grid.Column="4" Grid.Row="5" x:Name="b" Content="Enregistrer compétence" Height="35" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
 
     </Grid>
 </Page>
