@@ -52,7 +52,7 @@ namespace ApplicationMarcassin
 
         private void List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(((BO.Groupe)List.SelectedItem) != null)
+            if((List.SelectedItem) is BO.Groupe)
                 NavigationService.Navigate((new ModificationGroupe(((BO.Groupe)List.SelectedItem))));
         }
 
@@ -90,6 +90,11 @@ namespace ApplicationMarcassin
                     List.Items.Refresh();
                 }
             }
+        }
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

@@ -42,7 +42,7 @@
             <ComboBoxItem Content="Groupe" Foreground="#FCA324" HorizontalAlignment="center"/>
         </ComboBox>
         <Button x:Name="BtnRecherche" Click="BtnRecherche_Click" Content="Recherche" Grid.Row="2" Grid.Column="5" Height="35" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
-        <ListView x:Name="listViewCompetence" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
+        <ListView x:Name="listViewCompetence" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900" MouseDoubleClick="listViewCompetence_MouseDoubleClick">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -62,7 +62,31 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView SelectedItem="{Binding Select}" x:Name="listViewEmploye" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
+        <ListView SelectedItem="{Binding Select}" x:Name="listDal" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900" MouseDoubleClick="listDal_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="400" Header="Nom des catégories" DisplayMemberBinding="{Binding Intitule}">
+
+                    </GridViewColumn>
+                    <GridViewColumn Width="400"  Header="ID Super Catégorie" DisplayMemberBinding="{Binding Id_Super_Categorie}">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView  SelectedItem="{Binding Select}" x:Name="listDalLangue" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900" MouseDoubleClick="listDalLangue_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="400" Header="Nom des langues" DisplayMemberBinding="{Binding Nom}">
+
+                    </GridViewColumn>
+                    <GridViewColumn Width="400"  Header="Langue par defaut" DisplayMemberBinding="{Binding Default}">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView SelectedItem="{Binding Select}" x:Name="listViewEmploye" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900" MouseDoubleClick="listViewEmploye_MouseDoubleClick">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"
@@ -95,7 +119,7 @@
 
             </ListView.View>
         </ListView>
-        <ListView SelectedItem="{Binding Select}" x:Name="listViewGroupe" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900">
+        <ListView SelectedItem="{Binding Select}" x:Name="listViewGroupe" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Width="900" MouseDoubleClick="listViewGroupe_MouseDoubleClick">
             <ListView.View>
 
                 <GridView AllowsColumnReorder="true"

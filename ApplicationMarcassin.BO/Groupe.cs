@@ -31,7 +31,7 @@ namespace ApplicationMarcassin.BO
                           {
                               Id_Employe = employe.Id_Employe,
                               Nom = employe.Nom,
-                              Prenom = employe.Prénom,
+                              Prenom = employe.Prenom,
                               Service = employe.Service
                           };
 
@@ -43,7 +43,7 @@ namespace ApplicationMarcassin.BO
                           {
                               Id_Employe = employe.Id_Employe,
                               Nom = employe.Nom,
-                              Prenom = employe.Prénom,
+                              Prenom = employe.Prenom,
                               Service = employe.Service
                           };
 

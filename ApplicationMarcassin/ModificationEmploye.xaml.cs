@@ -83,6 +83,13 @@ namespace ApplicationMarcassin
                                      Actuel = c.Actuel,
                                      Id_CompetenceActuel = c.Id_CompetenceActuel
                                  };
+                foreach(var v in Competence)
+                {
+                    v.IntituleCompetences = BO.IntituleCompetence.ListDALtoBO((from c in db.IntituleCompetences
+                                            where c.Id_Competence == v.Id_Competence
+                                            select c).ToList());
+                    System.Diagnostics.Debug.WriteLine(v.IntituleCompetences.ToList().First().Intitule);
+                }
                 var CompetencePossede = from c in db.Competences
                                         join ic in db.LiaisonCompetences
                                         on c.Id_Competence equals ic.Id_Competence
@@ -103,47 +110,52 @@ namespace ApplicationMarcassin
                 ListViewCompetence.ItemsSource = Competence.ToList();
                 ListViewCompetence.MouseDoubleClick += (sender, e) =>
                 {
-                    var NouvelleCompetence = ((BO.Competence)ListViewCompetence.SelectedItem);
-                    var verifdoublons = 0;
-                    foreach (var x in ListCompetence)
+                    if (ListViewCompetence.SelectedItem is BO.Competence)
                     {
-                        if (NouvelleCompetence != null)
+                        var NouvelleCompetence = ((BO.Competence)ListViewCompetence.SelectedItem);
+                        var verifdoublons = 0;
+                        foreach (var x in ListCompetence)
                         {
-                            if (x.Id_Competence == NouvelleCompetence.Id_Competence)
+                            if (NouvelleCompetence != null)
                             {
-                                verifdoublons = 1;
+                                if (x.Id_Competence == NouvelleCompetence.Id_Competence)
+                                {
+                                    verifdoublons = 1;
+                                }
                             }
                         }
-                    }
 
-                    if (verifdoublons == 0)
-                    {
-                        ListCompetence.Add(NouvelleCompetence);
-                        ListBoxCompetence.Items.Refresh();
+                        if (verifdoublons == 0)
+                        {
+                            ListCompetence.Add(NouvelleCompetence);
+                            ListBoxCompetence.Items.Refresh();
+                        }
                     }
                 };
                 ListBoxLangue.ItemsSource = langue.ToList();
                 ListBoxLangue.MouseDoubleClick += (sender, e) =>
                 {
-
-                    var NouvelleLangue = ((BO.Langue)ListBoxLangue.SelectedItem);
-                    var verifdoublons = 0;
-                    foreach (var x in ListLangue)
+                    if (ListBoxLangue.SelectedItem is BO.Langue)
                     {
-                        if (x.Id_Langue == NouvelleLangue.Id_Langue)
+                        var NouvelleLangue = ((BO.Langue)ListBoxLangue.SelectedItem);
+                        var verifdoublons = 0;
+                        foreach (var x in ListLangue)
                         {
-                            verifdoublons = 1;
+                            if (x.Id_Langue == NouvelleLangue.Id_Langue)
+                            {
+                                verifdoublons = 1;
+                            }
                         }
-                    }
 
-                    if (verifdoublons == 0)
-                    {
-                        ListLangue.Add(NouvelleLangue);
-                        ListBoxLangueSelection.Items.Refresh();
-                    }
+                        if (verifdoublons == 0)
+                        {
+                            ListLangue.Add(NouvelleLangue);
+                            ListBoxLangueSelection.Items.Refresh();
+                        }
+                    };
+                    ListBoxCompetence.ItemsSource = ListCompetence;
+                    ListBoxLangueSelection.ItemsSource = ListLangue;
                 };
-                ListBoxCompetence.ItemsSource = ListCompetence;
-                ListBoxLangueSelection.ItemsSource = ListLangue;
             }
         }
 
@@ -241,8 +253,8 @@ namespace ApplicationMarcassin
                         DALEmploye.Metier = Metier.Text;
                     if (Nom.Text != DALEmploye.Nom)
                         DALEmploye.Nom = Nom.Text;
-                    if (Prenom.Text != DALEmploye.Prénom)
-                        DALEmploye.Prénom = Prenom.Text;
+                    if (Prenom.Text != DALEmploye.Prenom)
+                        DALEmploye.Prenom = Prenom.Text;
                     if (DateArrivee.SelectedDate != DALEmploye.DateArrive)
                         DALEmploye.DateArrive = DateArrivee.SelectedDate.Value;
                     if (Employe.DateDepart != null)

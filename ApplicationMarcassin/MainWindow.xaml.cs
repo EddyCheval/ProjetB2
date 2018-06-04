@@ -123,14 +123,7 @@ namespace ApplicationMarcassin
                 System.Diagnostics.Debug.WriteLine(list[3].IntituleCompetences[0].Intitule);
                 NavigationService nav = Frame.NavigationService;
                 ListViewCompetence l = new ListViewCompetence();
-                //nav.Navigate(new Uri("CreateCompetence.xaml",UriKind.Relative));
-                //nav.Navigate(new Uri("Groupe.xaml", UriKind.Relative));
-                // nav.Navigate(new ModificationCompetence(list[3]));
-                //nav.Navigate(new ListViewGroup());
-                //nav.Navigate(new ListViewCompetence());
-                // nav.Navigate(new ListViewEmploye());
-                //nav.Navigate(new CreationEmploye());
-                nav.Navigate(new Menu());
+                nav.Navigate(new PageConnexion());
             }
         }
         }

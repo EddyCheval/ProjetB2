@@ -24,7 +24,7 @@ namespace ApplicationMarcassin.BO
         public Employe(DAL.Employe employe)
         {
             this.Nom = employe.Nom;
-            this.Prenom = employe.Prénom;
+            this.Prenom = employe.Prenom;
             this.Service = employe.Service;
             this.Id_Employe = employe.Id_Employe;
             this.Metier = employe.Metier;

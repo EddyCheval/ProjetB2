@@ -34,11 +34,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="AddLangue" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="AddLangue_Click" Margin="0 0 150 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
+        <Button x:Name="AddLangue" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="AddLangue_Click" Margin="0 0 250 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
             Ajouter
         </Button>
-        <Button x:Name="DeleteLangue" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="DeleteLangue_Click" Margin="150 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
+        <Button x:Name="DeleteLangue" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="DeleteLangue_Click" Margin="250 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
             Supprimer
+        </Button>
+        <Button x:Name="Menu" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="Menu_Click" Margin="0 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
+            Menu
         </Button>
     </Grid>
 </Page>

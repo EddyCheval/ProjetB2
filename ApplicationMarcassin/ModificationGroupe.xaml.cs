@@ -45,7 +45,7 @@ namespace ApplicationMarcassin
                                   select new BO.Employe
                                   {
                                       Nom = employe.Nom,
-                                      Prenom = employe.Prénom,
+                                      Prenom = employe.Prenom,
                                       Service = employe.Service,
                                       Id_Employe = employe.Id_Employe
                                   };
@@ -83,15 +83,18 @@ namespace ApplicationMarcassin
                 ListViewParticipant.ItemsSource = participant.ToList();
                 ListViewParticipant.MouseDoubleClick += (sender, e) =>
                 {
-                    var Nouveauparticipant = ((BO.Employe)ListViewParticipant.SelectedItem);
-                    var verifdoublons = 0;
-                    foreach (var x in groupe.Participant)
+                    if (ListViewParticipant.SelectedItem is BO.Employe)
                     {
-                        if (x.Id_Employe == Nouveauparticipant.Id_Employe)
+                        var Nouveauparticipant = ((BO.Employe)ListViewParticipant.SelectedItem);
+                        var verifdoublons = 0;
+                        foreach (var x in groupe.Participant)
                         {
-                            verifdoublons = 1;
+                            if (x.Id_Employe == Nouveauparticipant.Id_Employe)
+                            {
+                                verifdoublons = 1;
+                            }
                         }
-                    }
+                    
 
                     if (verifdoublons == 0)
                     {
@@ -102,6 +105,7 @@ namespace ApplicationMarcassin
                         }
                         ListBoxTuteur.Items.Refresh();
                     }
+                }
                 };
                 //Tuteur
                 System.Diagnostics.Debug.WriteLine(Groupe.Participant.IndexOf(Groupe.Participant.Where(c => c.Id_Employe == Tuteur.Id_Employe).FirstOrDefault()));
@@ -171,7 +175,7 @@ namespace ApplicationMarcassin
                         if (req.Where(c => c.Id_Employe == x.Id_Employe).Count() == 0)
                         {
                             var membre = new DAL.Membre();
-                            if (x.Id_Employe == Tuteur.Id_Employe)
+                            if (ListBoxTuteur.SelectedItem is BO.Employe && x.Id_Employe == Tuteur.Id_Employe)
                             {
                                 tuteur = true;
                                 membre = new DAL.Membre
@@ -196,6 +200,17 @@ namespace ApplicationMarcassin
                             db.Membres.Add(membre);
                         }
                     }
+                    if(req.Where(c => c.Id_Employe==Tuteur.Id_Employe && c.EstTutorant == true).Count() == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine(Tuteur.Id_Employe +" "+ Groupe.Id_Groupe);
+                        var modif = db.Membres.Find(Groupe.Id_Groupe, Tuteur.Id_Employe);
+                        modif.EstTutorant = true;
+                        if (!(req.Where(c => c.EstTutorant == true).ToList().First() is null))
+                        {
+                            var modif2 = db.Membres.Find(Groupe.Id_Groupe, req.Where(c => c.EstTutorant == true).ToList().First().Id_Employe);
+                            modif2.EstTutorant = false;
+                        }
+                    }
                     foreach(var x  in req.ToList())
                     {
                         if(Groupe.Participant.Where(c => c.Id_Employe == x.Id_Employe).Count()==0)
@@ -203,10 +218,6 @@ namespace ApplicationMarcassin
                             db.Membres.Attach(x);
                             db.Membres.Remove(x);
                         }
-                    }
-                    if (tuteur == false)
-                    {
-                        MessageBoxResult result = MessageBox.Show("Warning : Vous n'avez pas selectionné de tuteur");
                     }
                     db.SaveChanges();
                     ListViewCompetence l = new ListViewCompetence();
@@ -236,12 +247,12 @@ namespace ApplicationMarcassin
                 var participant = from employe in db.Employes
                                   where //employe.Nom == TextRecherche.Text || employe.Prénom == TextRecherche.Text || employe.Service == TextRecherche.Text
                                    SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Nom) > 0
-                                  || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Prénom) > 0
+                                  || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Prenom) > 0
                                   || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Service) > 0
                                   select new BO.Employe
                                   {
                                       Nom = employe.Nom,
-                                      Prenom = employe.Prénom,
+                                      Prenom = employe.Prenom,
                                       Service = employe.Service,
                                       Id_Employe = employe.Id_Employe
                                   };

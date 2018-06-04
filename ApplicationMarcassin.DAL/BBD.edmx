@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BBD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categorie">
           <Key>
             <PropertyRef Name="Id_Categorie" />
@@ -38,7 +38,7 @@
           </Key>
           <Property Name="Id_Employe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdresseMail" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Entreprise" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EstInterne" Type="bit" Nullable="false" />
@@ -50,6 +50,8 @@
           <Property Name="DateArrive" Type="date" Nullable="false" />
           <Property Name="DateDepart" Type="date" />
           <Property Name="Actif" Type="bit" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="50" />
+          <Property Name="Identifiant" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
@@ -583,7 +585,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="BBDStoreContainer">
           <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
@@ -695,7 +697,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BBD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <ComplexType Name="CompCategorie_Result">
           <Property Name="Intitule" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -718,6 +720,19 @@
           <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Intitule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="GroupeMessagerie_Result">
+          <Property Name="Id_Expediteur" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Contenu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MembresGroupe_Result">
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Offrant_Result">
           <Property Name="Id_Employe" Type="Int32" />
@@ -784,7 +799,7 @@
           </Key>
           <Property Name="Id_Employe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdresseMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Entreprise" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EstInterne" Type="Boolean" Nullable="false" />
@@ -800,10 +815,12 @@
           <NavigationProperty Name="Demandes1" Relationship="Self.FK_Demande_Employe" FromRole="Employe" ToRole="Demande" />
           <NavigationProperty Name="LanguePossedes" Relationship="Self.FK_LanguePossede_Employe" FromRole="Employe" ToRole="LanguePossede" />
           <NavigationProperty Name="Membres" Relationship="Self.FK_Membre_Employe" FromRole="Employe" ToRole="Membre" />
+          <NavigationProperty Name="Messageries" Relationship="Self.FK_Messagerie_Employe" FromRole="Employe" ToRole="Messagerie" />
           <NavigationProperty Name="Notes" Relationship="Self.FK_Note_EmployeTuteur" FromRole="Employe" ToRole="Note" />
           <NavigationProperty Name="Notes1" Relationship="Self.FK_Note_EmployeTutore" FromRole="Employe" ToRole="Note" />
           <NavigationProperty Name="LiaisonCompetences" Relationship="Self.FK_SystemDeTutorat_Employe" FromRole="Employe" ToRole="LiaisonCompetence" />
-          <NavigationProperty Name="Messageries" Relationship="Model.FK_Messagerie_Employe" FromRole="Employe" ToRole="Messagerie" />
+          <Property Name="MotDePasse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Identifiant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
@@ -894,9 +911,9 @@
           <Property Name="Id_Groupe" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Contenu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Groupe" Relationship="Self.FK_Messagerie_Groupe" FromRole="Messagerie" ToRole="Groupe" />
           <Property Name="Id_Expediteur" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employe" Relationship="Model.FK_Messagerie_Employe" FromRole="Messagerie" ToRole="Employe" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Messagerie_Employe" FromRole="Messagerie" ToRole="Employe" />
+          <NavigationProperty Name="Groupe" Relationship="Self.FK_Messagerie_Groupe" FromRole="Messagerie" ToRole="Groupe" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -1066,6 +1083,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Messagerie_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="Messagerie" Type="Self.Messagerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id_Employe" />
+            </Principal>
+            <Dependent Role="Messagerie">
+              <PropertyRef Name="Id_Expediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Note_EmployeTuteur">
           <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
           <End Role="Note" Type="Self.Note" Multiplicity="*" />
@@ -1229,6 +1258,10 @@
             <End Role="Employe" EntitySet="Employes" />
             <End Role="Membre" EntitySet="Membres" />
           </AssociationSet>
+          <AssociationSet Name="FK_Messagerie_Employe" Association="Self.FK_Messagerie_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Messagerie" EntitySet="Messageries" />
+          </AssociationSet>
           <AssociationSet Name="FK_Note_EmployeTuteur" Association="Self.FK_Note_EmployeTuteur">
             <End Role="Employe" EntitySet="Employes" />
             <End Role="Note" EntitySet="Notes" />
@@ -1265,21 +1298,27 @@
             <End Role="Categorie" EntitySet="Categories" />
             <End Role="Competence" EntitySet="Competences" />
           </AssociationSet>
-          <FunctionImport Name="CompCategorie" IsComposable="true" ReturnType="Collection(Model.CompCategorie_Result)">
+          <FunctionImport Name="CompCategorie" IsComposable="true" ReturnType="Collection(BBD.CompCategorie_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="Idlangue" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Demandeur" IsComposable="true" ReturnType="Collection(Model.Demandeur_Result)">
+          <FunctionImport Name="Demandeur" IsComposable="true" ReturnType="Collection(BBD.Demandeur_Result)">
           <Parameter Name="IdLangue" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DemandeurParCompetennceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(Model.DemandeurParCompetennceAvecLangueEtIntituleActu_Result)">
+          <FunctionImport Name="DemandeurParCompetennceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(BBD.DemandeurParCompetennceAvecLangueEtIntituleActu_Result)">
             <Parameter Name="IdComp" Mode="In" Type="Int32" />
             <Parameter Name="IdLangue" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Offrant" IsComposable="true" ReturnType="Collection(Model.Offrant_Result)">
+          <FunctionImport Name="GroupeMessagerie" IsComposable="true" ReturnType="Collection(BBD.GroupeMessagerie_Result)">
+          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MembresGroupe" IsComposable="true" ReturnType="Collection(BBD.MembresGroupe_Result)">
+          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Offrant" IsComposable="true" ReturnType="Collection(BBD.Offrant_Result)">
           <Parameter Name="IdLangue" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="OffrantParCompetenceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(Model.OffrantParCompetenceAvecLangueEtIntituleActu_Result)">
+          <FunctionImport Name="OffrantParCompetenceAvecLangueEtIntituleActu" IsComposable="true" ReturnType="Collection(BBD.OffrantParCompetenceAvecLangueEtIntituleActu_Result)">
             <Parameter Name="IdComp" Mode="In" Type="Int32" />
             <Parameter Name="IdLangue" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1299,11 +1338,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BBD.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BBD.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1313,16 +1352,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <AssociationSet Name="FK_Messagerie_Employe" Association="Model.FK_Messagerie_Employe">
-            <End Role="Employe" EntitySet="Employes" />
-            <End Role="Messagerie" EntitySet="Messageries" />
-          </AssociationSet>
-          <FunctionImport Name="GroupeMessagerie" IsComposable="true" ReturnType="Collection(Model.GroupeMessagerie_Result)">
-          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="MembresGroupe" IsComposable="true" ReturnType="Collection(Model.MembresGroupe_Result)">
-          <Parameter Name="Id_Groupe" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1335,39 +1364,14 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <Association Name="FK_Messagerie_Employe">
-          <End Type="Model.Employe" Role="Employe" Multiplicity="1" />
-          <End Type="Model.Messagerie" Role="Messagerie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employe">
-              <PropertyRef Name="Id_Employe" />
-            </Principal>
-            <Dependent Role="Messagerie">
-              <PropertyRef Name="Id_Expediteur" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="GroupeMessagerie_Result">
-          <Property Type="Int32" Name="Id_Expediteur" Nullable="false" />
-          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Prénom" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Date" Nullable="false" Precision="10" />
-          <Property Type="String" Name="Contenu" Nullable="false" MaxLength="200" />
-        </ComplexType>
-        <ComplexType Name="MembresGroupe_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Prénom" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="Statut" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="BBD_projetEntities">
+        <EntityContainerMapping StorageEntityContainer="BBDStoreContainer" CdmEntityContainer="BBD_projetEntities">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="Model.Categorie">
+            <EntityTypeMapping TypeName="BBD.Categorie">
               <MappingFragment StoreEntitySet="Categorie">
                 <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categorie" />
                 <ScalarProperty Name="Intitule" ColumnName="Intitule" />
@@ -1376,7 +1380,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Competences">
-            <EntityTypeMapping TypeName="Model.Competence">
+            <EntityTypeMapping TypeName="BBD.Competence">
               <MappingFragment StoreEntitySet="Competence">
                 <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
                 <ScalarProperty Name="Actuel" ColumnName="Actuel" />
@@ -1387,7 +1391,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Demandes">
-            <EntityTypeMapping TypeName="Model.Demande">
+            <EntityTypeMapping TypeName="BBD.Demande">
               <MappingFragment StoreEntitySet="Demande">
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
@@ -1396,11 +1400,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employes">
-            <EntityTypeMapping TypeName="Model.Employe">
+            <EntityTypeMapping TypeName="BBD.Employe">
               <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="AdresseMail" ColumnName="AdresseMail" />
                 <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
                 <ScalarProperty Name="EstInterne" ColumnName="EstInterne" />
@@ -1416,7 +1422,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groupes">
-            <EntityTypeMapping TypeName="Model.Groupe">
+            <EntityTypeMapping TypeName="BBD.Groupe">
               <MappingFragment StoreEntitySet="Groupe">
                 <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
                 <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
@@ -1428,7 +1434,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IntituleCategories">
-            <EntityTypeMapping TypeName="Model.IntituleCategorie">
+            <EntityTypeMapping TypeName="BBD.IntituleCategorie">
               <MappingFragment StoreEntitySet="IntituleCategorie">
                 <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categorie" />
                 <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
@@ -1437,7 +1443,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IntituleCompetences">
-            <EntityTypeMapping TypeName="Model.IntituleCompetence">
+            <EntityTypeMapping TypeName="BBD.IntituleCompetence">
               <MappingFragment StoreEntitySet="IntituleCompetence">
                 <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
                 <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
@@ -1447,7 +1453,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Langues">
-            <EntityTypeMapping TypeName="Model.Langue">
+            <EntityTypeMapping TypeName="BBD.Langue">
               <MappingFragment StoreEntitySet="Langue">
                 <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
@@ -1456,7 +1462,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LanguePossedes">
-            <EntityTypeMapping TypeName="Model.LanguePossede">
+            <EntityTypeMapping TypeName="BBD.LanguePossede">
               <MappingFragment StoreEntitySet="LanguePossede">
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Id_Langue" ColumnName="Id_Langue" />
@@ -1465,7 +1471,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LiaisonCompetences">
-            <EntityTypeMapping TypeName="Model.LiaisonCompetence">
+            <EntityTypeMapping TypeName="BBD.LiaisonCompetence">
               <MappingFragment StoreEntitySet="LiaisonCompetence">
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
@@ -1474,7 +1480,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Membres">
-            <EntityTypeMapping TypeName="Model.Membre">
+            <EntityTypeMapping TypeName="BBD.Membre">
               <MappingFragment StoreEntitySet="Membre">
                 <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
@@ -1483,18 +1489,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Messageries">
-            <EntityTypeMapping TypeName="Model.Messagerie">
+            <EntityTypeMapping TypeName="BBD.Messagerie">
               <MappingFragment StoreEntitySet="Messagerie">
-                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
                 <ScalarProperty Name="Id_Message" ColumnName="Id_Message" />
                 <ScalarProperty Name="Id_Groupe" ColumnName="Id_Groupe" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notes">
-            <EntityTypeMapping TypeName="Model.Note">
+            <EntityTypeMapping TypeName="BBD.Note">
               <MappingFragment StoreEntitySet="Note">
                 <ScalarProperty Name="Id_Tutore" ColumnName="Id_Tutore" />
                 <ScalarProperty Name="Id_Tuteur" ColumnName="Id_Tuteur" />
@@ -1504,7 +1510,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Model.sysdiagram">
+            <EntityTypeMapping TypeName="BBD.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1514,7 +1520,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="LiaisonCategorieMultiple" TypeName="Model.LiaisonCategorieMultiple" StoreEntitySet="LiaisonCategorieMultiple">
+          <AssociationSetMapping Name="LiaisonCategorieMultiple" TypeName="BBD.LiaisonCategorieMultiple" StoreEntitySet="LiaisonCategorieMultiple">
             <EndProperty Name="Categorie">
               <ScalarProperty Name="Id_Categorie" ColumnName="Id_Categoire" />
             </EndProperty>
@@ -1522,17 +1528,17 @@
               <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionName="Model.Store.CompCategorie" FunctionImportName="CompCategorie">
+          <FunctionImportMapping FunctionName="BBD.Store.CompCategorie" FunctionImportName="CompCategorie">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.CompCategorie_Result">
+              <ComplexTypeMapping TypeName="BBD.CompCategorie_Result">
                 <ScalarProperty Name="Intitule" ColumnName="Intitule" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="Model.Store.Demandeur" FunctionImportName="Demandeur">
+          <FunctionImportMapping FunctionName="BBD.Store.Demandeur" FunctionImportName="Demandeur">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.Demandeur_Result">
+              <ComplexTypeMapping TypeName="BBD.Demandeur_Result">
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
@@ -1545,9 +1551,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="Model.Store.DemandeurParCompetennceAvecLangueEtIntituleActu" FunctionImportName="DemandeurParCompetennceAvecLangueEtIntituleActu">
+          <FunctionImportMapping FunctionName="BBD.Store.DemandeurParCompetennceAvecLangueEtIntituleActu" FunctionImportName="DemandeurParCompetennceAvecLangueEtIntituleActu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.DemandeurParCompetennceAvecLangueEtIntituleActu_Result">
+              <ComplexTypeMapping TypeName="BBD.DemandeurParCompetennceAvecLangueEtIntituleActu_Result">
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
@@ -1557,9 +1563,30 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="Model.Store.Offrant" FunctionImportName="Offrant">
+          <FunctionImportMapping FunctionName="BBD.Store.GroupeMessagerie" FunctionImportName="GroupeMessagerie">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.Offrant_Result">
+              <ComplexTypeMapping TypeName="BBD.GroupeMessagerie_Result">
+                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BBD.Store.MembresGroupe" FunctionImportName="MembresGroupe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBD.MembresGroupe_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BBD.Store.Offrant" FunctionImportName="Offrant">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBD.Offrant_Result">
                 <ScalarProperty Name="Id_Employe" ColumnName="Id_Employe" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
@@ -1569,9 +1596,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="Model.Store.OffrantParCompetenceAvecLangueEtIntituleActu" FunctionImportName="OffrantParCompetenceAvecLangueEtIntituleActu">
+          <FunctionImportMapping FunctionName="BBD.Store.OffrantParCompetenceAvecLangueEtIntituleActu" FunctionImportName="OffrantParCompetenceAvecLangueEtIntituleActu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.OffrantParCompetenceAvecLangueEtIntituleActu_Result">
+              <ComplexTypeMapping TypeName="BBD.OffrantParCompetenceAvecLangueEtIntituleActu_Result">
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
@@ -1582,20 +1609,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BBD.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BBD.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BBD.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BBD.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="BBD.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BBD.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="BBD.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1604,29 +1631,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="GroupeMessagerie" FunctionName="Model.Store.GroupeMessagerie">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.GroupeMessagerie_Result">
-                <ScalarProperty Name="Id_Expediteur" ColumnName="Id_Expediteur" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="MembresGroupe" FunctionName="Model.Store.MembresGroupe">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.MembresGroupe_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
-                <ScalarProperty Name="Statut" ColumnName="Statut" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BBD.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BBD.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

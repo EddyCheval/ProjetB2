@@ -20,7 +20,7 @@ namespace ApplicationMarcassin.DAL
         public string Contenu { get; set; }
         public int Id_Expediteur { get; set; }
     
-        public virtual Groupe Groupe { get; set; }
         public virtual Employe Employe { get; set; }
+        public virtual Groupe Groupe { get; set; }
     }
 }

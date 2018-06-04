@@ -93,7 +93,7 @@
                       Header="Année" Width="50"/>
 
                     <GridViewColumn DisplayMemberBinding=
-                          "{Binding Path=IntituleCompetence}" 
+                          "{Binding Path=IntituleCompetences[0].intitule}" 
                       Width="90" Header="Intitule"/>
 
                     <GridViewColumn DisplayMemberBinding=

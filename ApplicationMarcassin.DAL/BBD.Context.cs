@@ -80,6 +80,26 @@ namespace ApplicationMarcassin.DAL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<DemandeurParCompetennceAvecLangueEtIntituleActu_Result>("[BBD_projetEntities].[DemandeurParCompetennceAvecLangueEtIntituleActu](@IdComp, @IdLangue)", idCompParameter, idLangueParameter);
         }
     
+        [DbFunction("BBD_projetEntities", "GroupeMessagerie")]
+        public virtual IQueryable<GroupeMessagerie_Result> GroupeMessagerie(Nullable<int> id_Groupe)
+        {
+            var id_GroupeParameter = id_Groupe.HasValue ?
+                new ObjectParameter("Id_Groupe", id_Groupe) :
+                new ObjectParameter("Id_Groupe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GroupeMessagerie_Result>("[BBD_projetEntities].[GroupeMessagerie](@Id_Groupe)", id_GroupeParameter);
+        }
+    
+        [DbFunction("BBD_projetEntities", "MembresGroupe")]
+        public virtual IQueryable<MembresGroupe_Result> MembresGroupe(Nullable<int> id_Groupe)
+        {
+            var id_GroupeParameter = id_Groupe.HasValue ?
+                new ObjectParameter("Id_Groupe", id_Groupe) :
+                new ObjectParameter("Id_Groupe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<MembresGroupe_Result>("[BBD_projetEntities].[MembresGroupe](@Id_Groupe)", id_GroupeParameter);
+        }
+    
         [DbFunction("BBD_projetEntities", "Offrant")]
         public virtual IQueryable<Offrant_Result> Offrant(Nullable<int> idLangue)
         {
@@ -205,26 +225,6 @@ namespace ApplicationMarcassin.DAL
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        [DbFunction("BBD_projetEntities", "GroupeMessagerie")]
-        public virtual IQueryable<GroupeMessagerie_Result> GroupeMessagerie(Nullable<int> id_Groupe)
-        {
-            var id_GroupeParameter = id_Groupe.HasValue ?
-                new ObjectParameter("Id_Groupe", id_Groupe) :
-                new ObjectParameter("Id_Groupe", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GroupeMessagerie_Result>("[BBD_projetEntities].[GroupeMessagerie](@Id_Groupe)", id_GroupeParameter);
-        }
-    
-        [DbFunction("BBD_projetEntities", "MembresGroupe")]
-        public virtual IQueryable<MembresGroupe_Result> MembresGroupe(Nullable<int> id_Groupe)
-        {
-            var id_GroupeParameter = id_Groupe.HasValue ?
-                new ObjectParameter("Id_Groupe", id_Groupe) :
-                new ObjectParameter("Id_Groupe", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<MembresGroupe_Result>("[BBD_projetEntities].[MembresGroupe](@Id_Groupe)", id_GroupeParameter);
         }
     }
 }

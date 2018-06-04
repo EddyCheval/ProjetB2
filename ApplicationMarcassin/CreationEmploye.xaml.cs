@@ -121,10 +121,12 @@ namespace ApplicationMarcassin
                         Metier = Metier.Text,
                         Service = Service.Text,
                         Nom = Nom.Text,
-                        Prénom = Prenom.Text,
+                        Prenom = Prenom.Text,
                         DateArrive = DateArrivee.SelectedDate.Value,
                         Entreprise = Entreprise.Text,
-                        LienLinkedin = LinkedIn.Text
+                        LienLinkedin = LinkedIn.Text,
+                        Identifiant = Nom + "." + Prenom,
+                        MotDePasse = "Epsi2018!"
                     };
                     if (DateDepart.SelectedDate != null)
                     {

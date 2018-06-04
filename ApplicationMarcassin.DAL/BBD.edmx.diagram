@@ -4,43 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b771598e95814383a358b221f0534d1e" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="Model.Categorie" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Competence" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Demande" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Employe" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Groupe" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.IntituleCategorie" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.IntituleCompetence" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Langue" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.LanguePossede" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.LiaisonCompetence" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Membre" Width="1.5" PointX="7.5" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Messagerie" Width="1.5" PointX="7.5" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Note" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Categorie_Categorie" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IntituleCategorie_Categorie" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Competence_CompetenceActuel" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Demande_Competence" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Groupe_Competence" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IntituleCompetence_Competence1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Note_Competence" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_SystemDeTutorat_Competence" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Demande_DuTuteur" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Demande_Employe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_LanguePossede_Employe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Membre_Employe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Note_EmployeTuteur" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Note_EmployeTutore" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_SystemDeTutorat_Employe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Membre_Groupe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Messagerie_Groupe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IntituleCategorie_Langue" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IntituleCompetence_Langue1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_LanguePossede_Langue" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.LiaisonCategorieMultiple" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Messagerie_Employe" />
+      <Diagram DiagramId="9cb19c982c8344269e236a9b697e2f1e" Name="Diagram1">
+        <EntityTypeShape EntityType="BBD.Categorie" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Competence" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Demande" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Employe" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Groupe" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.IntituleCategorie" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.IntituleCompetence" Width="1.5" PointX="6.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Langue" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.LanguePossede" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.LiaisonCompetence" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Membre" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Messagerie" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.Note" Width="1.5" PointX="6" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBD.sysdiagram" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="BBD.FK_Categorie_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_IntituleCategorie_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Competence_CompetenceActuel" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Demande_Competence" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Groupe_Competence" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_IntituleCompetence_Competence1" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Note_Competence" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_SystemDeTutorat_Competence" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Demande_DuTuteur" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Demande_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_LanguePossede_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Membre_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Messagerie_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Note_EmployeTuteur" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Note_EmployeTutore" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_SystemDeTutorat_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Membre_Groupe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_Messagerie_Groupe" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_IntituleCategorie_Langue" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_IntituleCompetence_Langue1" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.FK_LanguePossede_Langue" ManuallyRouted="false" />
+        <AssociationConnector Association="BBD.LiaisonCategorieMultiple" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

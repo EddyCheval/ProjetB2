@@ -38,7 +38,7 @@ namespace ApplicationMarcassin
                                   select new BO.Employe
                                   {
                                       Nom = employe.Nom,
-                                      Prenom = employe.Prénom,
+                                      Prenom = employe.Prenom,
                                       Service = employe.Service,
                                       Id_Employe = employe.Id_Employe
                                   };
@@ -115,14 +115,14 @@ namespace ApplicationMarcassin
             using (var db = new BBD_projetEntities())
             {
                 var participant = from employe in db.Employes
-                                  where //employe.Nom == TextRecherche.Text || employe.Prénom == TextRecherche.Text || employe.Service == TextRecherche.Text
+                                  where //employe.Nom == TextRecherche.Text || employe.Prenom == TextRecherche.Text || employe.Service == TextRecherche.Text
                                    SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Nom) > 0
-                                  || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Prénom) > 0
+                                  || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Prenom) > 0
                                   || SqlFunctions.PatIndex("%" + TextRecherche.Text + "%", employe.Service) > 0
                                   select new BO.Employe
                                   {
                                       Nom = employe.Nom,
-                                      Prenom = employe.Prénom,
+                                      Prenom = employe.Prenom,
                                       Service = employe.Service,
                                       Id_Employe = employe.Id_Employe
                                   };

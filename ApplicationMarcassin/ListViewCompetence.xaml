@@ -42,7 +42,10 @@
                 </ListView.View>
             </ListView>
         </StackPanel>
-        <Button x:Name="Suppression" Content="Supprimer" Click="Suppression_Click" Grid.Column="1" Grid.Row="2" Margin="150 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
-        <Button x:Name="Creation" Content="Créer" Click="Creation_Click" Grid.Column="1" Grid.Row="2" Margin="0 0 150 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Suppression" Content="Supprimer" Click="Suppression_Click" Grid.Column="1" Grid.Row="2" Margin="250 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Creation" Content="Créer" Click="Creation_Click" Grid.Column="1" Grid.Row="2" Margin="0 0 250 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}"/>
+        <Button x:Name="Menu" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="Menu_Click" Margin="0 0 0 0" Height="35" Width="100" FontSize="18" Background="#FCA324" BorderBrush="#ecf0f1" Foreground="White" Style="{StaticResource MyButton}">
+            Menu
+        </Button>
     </Grid>
 </Page>

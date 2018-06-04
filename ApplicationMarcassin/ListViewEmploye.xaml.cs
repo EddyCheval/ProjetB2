@@ -39,7 +39,7 @@ namespace ApplicationMarcassin
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(((BO.Employe)list.SelectedItem) != null)
+            if(list.SelectedItem is BO.Employe)
                 NavigationService.Navigate((new ModificationEmploye(((BO.Employe)list.SelectedItem))));
         }
 
@@ -85,6 +85,11 @@ namespace ApplicationMarcassin
         private void Creation_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CreationEmploye());
+        }
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

@@ -53,7 +53,7 @@ namespace ApplicationMarcassin
 
         private void listBo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //NavigationService.Navigate(new ModificationLangue());
+            if(listDal.SelectedItem is DAL.Langue)
             NavigationService.Navigate((new ModificationLangue(((DAL.Langue)listDal.SelectedItem))));
         }
 
@@ -70,6 +70,11 @@ namespace ApplicationMarcassin
             }
             NavigationService.Navigate(new ListViewLangue());
 
+        }
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

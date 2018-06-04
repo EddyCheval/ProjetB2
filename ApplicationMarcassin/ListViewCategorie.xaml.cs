@@ -128,8 +128,15 @@ namespace ApplicationMarcassin
 
         private void listDal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if(listDal.SelectedItem is DAL.Categorie)
             NavigationService.Navigate((new ModificationCategorie(((DAL.Categorie)listDal.SelectedItem))));
 
+        }
+
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

@@ -65,6 +65,7 @@ namespace ApplicationMarcassin
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if(list.SelectedItem is BO.Competence)
            NavigationService.Navigate((new ModificationCompetence(((BO.Competence)list.SelectedItem))));
             //NavigationService nav = ((Frame)this.Parent).NavigationService;
             //nav.Navigate(new ModificationCompetence(((BO.Competence)list.SelectedItem)));
@@ -120,6 +121,12 @@ namespace ApplicationMarcassin
                     list.Items.Refresh();
                 }
             }
+        }
+
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationMarcassin;
+using ApplicationMarcassin.DAL;
 
 namespace ApplicationMarcassin.BO
 {
@@ -72,6 +73,24 @@ namespace ApplicationMarcassin.BO
         {
             get { return _intituleCompetence; }
             set { _intituleCompetence = value; }
+        }
+
+        public override string ToString()
+        {
+            using (var db = new BBD_projetEntities())
+            {
+                var l = db.LangueParDefaut();
+                var req = from i in db.IntituleCompetences
+                          where i.Id_Langue == l 
+                          && i.Id_Competence == this.Id_Competence
+                          select i;
+                if(req.ToList().Count() >0)
+                    return req.ToList().First().intitule;
+                else
+                {
+                    return "Id de la compétence : " +this.Id_Competence;
+                }
+            }
         }
     }
 }

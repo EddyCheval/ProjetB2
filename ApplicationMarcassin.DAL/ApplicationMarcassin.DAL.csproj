@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,19 +50,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BBD.Context.cs">
-      <DependentUpon>BBD.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>BBD.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="BBD.cs">
-      <DependentUpon>BBD.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>BBD.tt</DependentUpon>
     </Compile>
     <Compile Include="BBD.Designer.cs">
-      <DependentUpon>BBD.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>BBD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Categorie.cs">
       <DependentUpon>BBD.tt</DependentUpon>
@@ -135,10 +137,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <EntityDeploy Include="BBD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BBD.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="BBD.edmx.diagram">
+      <DependentUpon>BBD.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBD.Context.tt">
@@ -151,13 +161,6 @@
       <DependentUpon>BBD.edmx</DependentUpon>
       <LastGenOutput>BBD.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="BBD.edmx.diagram">
-      <DependentUpon>BBD.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

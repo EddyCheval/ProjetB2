@@ -21,15 +21,15 @@ namespace ApplicationMarcassin.DAL
             this.Demandes1 = new HashSet<Demande>();
             this.LanguePossedes = new HashSet<LanguePossede>();
             this.Membres = new HashSet<Membre>();
+            this.Messageries = new HashSet<Messagerie>();
             this.Notes = new HashSet<Note>();
             this.Notes1 = new HashSet<Note>();
             this.LiaisonCompetences = new HashSet<LiaisonCompetence>();
-            this.Messageries = new HashSet<Messagerie>();
         }
     
         public int Id_Employe { get; set; }
         public string Nom { get; set; }
-        public string Prénom { get; set; }
+        public string Prenom { get; set; }
         public string AdresseMail { get; set; }
         public string Entreprise { get; set; }
         public bool EstInterne { get; set; }
@@ -41,6 +41,8 @@ namespace ApplicationMarcassin.DAL
         public System.DateTime DateArrive { get; set; }
         public Nullable<System.DateTime> DateDepart { get; set; }
         public bool Actif { get; set; }
+        public string MotDePasse { get; set; }
+        public string Identifiant { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Demande> Demandes { get; set; }
@@ -51,12 +53,12 @@ namespace ApplicationMarcassin.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Membre> Membres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Messagerie> Messageries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Notes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Notes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LiaisonCompetence> LiaisonCompetences { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Messagerie> Messageries { get; set; }
     }
 }
