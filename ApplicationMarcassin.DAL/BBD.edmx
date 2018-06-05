@@ -50,8 +50,8 @@
           <Property Name="DateArrive" Type="date" Nullable="false" />
           <Property Name="DateDepart" Type="date" />
           <Property Name="Actif" Type="bit" Nullable="false" />
-          <Property Name="MotDePasse" Type="nvarchar" MaxLength="50" />
-          <Property Name="Identifiant" Type="nvarchar" MaxLength="50" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="500" />
+          <Property Name="Identifiant" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
@@ -146,6 +146,10 @@
           <Property Name="Id_Tuteur" Type="int" Nullable="false" />
           <Property Name="Id_Competence" Type="int" Nullable="false" />
           <Property Name="Note" Type="int" Nullable="false" />
+          <Property Name="NoteCommunication" Type="int" />
+          <Property Name="NoteConnaissance" Type="int" />
+          <Property Name="NotePedagogie" Type="int" />
+          <Property Name="NoteRelationnel" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -819,8 +823,8 @@
           <NavigationProperty Name="Notes" Relationship="Self.FK_Note_EmployeTuteur" FromRole="Employe" ToRole="Note" />
           <NavigationProperty Name="Notes1" Relationship="Self.FK_Note_EmployeTutore" FromRole="Employe" ToRole="Note" />
           <NavigationProperty Name="LiaisonCompetences" Relationship="Self.FK_SystemDeTutorat_Employe" FromRole="Employe" ToRole="LiaisonCompetence" />
-          <Property Name="MotDePasse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Identifiant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MotDePasse" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Identifiant" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Groupe">
           <Key>
@@ -928,6 +932,10 @@
           <NavigationProperty Name="Competence" Relationship="Self.FK_Note_Competence" FromRole="Note" ToRole="Competence" />
           <NavigationProperty Name="Employe" Relationship="Self.FK_Note_EmployeTuteur" FromRole="Note" ToRole="Employe" />
           <NavigationProperty Name="Employe1" Relationship="Self.FK_Note_EmployeTutore" FromRole="Note" ToRole="Employe" />
+          <Property Name="NoteCommunication" Type="Int32" />
+          <Property Name="NoteConnaissance" Type="Int32" />
+          <Property Name="NotePedagogie" Type="Int32" />
+          <Property Name="NoteRelationnel" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1502,6 +1510,10 @@
           <EntitySetMapping Name="Notes">
             <EntityTypeMapping TypeName="BBD.Note">
               <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="NoteRelationnel" ColumnName="NoteRelationnel" />
+                <ScalarProperty Name="NotePedagogie" ColumnName="NotePedagogie" />
+                <ScalarProperty Name="NoteConnaissance" ColumnName="NoteConnaissance" />
+                <ScalarProperty Name="NoteCommunication" ColumnName="NoteCommunication" />
                 <ScalarProperty Name="Id_Tutore" ColumnName="Id_Tutore" />
                 <ScalarProperty Name="Id_Tuteur" ColumnName="Id_Tuteur" />
                 <ScalarProperty Name="Id_Competence" ColumnName="Id_Competence" />

@@ -32,8 +32,9 @@ namespace ApplicationMarcassin
             using (var db = new BBD_projetEntities())
             {
                 var Mot = ComputeSha256Hash(MDP.Text);
+                var id = ComputeSha256Hash(Id.Text);
                 var req = (from em in db.Employes
-                           where em.Identifiant == Id.Text && em.MotDePasse == Mot && (em.EstAdmin==true || em.EstChefDeService==true)
+                           where em.Identifiant == id && em.MotDePasse == Mot && (em.EstAdmin==true || em.EstChefDeService==true)
                            select em).ToList();
                 if(req.Count == 1)
                 {

@@ -18,6 +18,10 @@ namespace ApplicationMarcassin.DAL
         public int Id_Tuteur { get; set; }
         public int Id_Competence { get; set; }
         public int Note1 { get; set; }
+        public Nullable<int> NoteCommunication { get; set; }
+        public Nullable<int> NoteConnaissance { get; set; }
+        public Nullable<int> NotePedagogie { get; set; }
+        public Nullable<int> NoteRelationnel { get; set; }
     
         public virtual Competence Competence { get; set; }
         public virtual Employe Employe { get; set; }

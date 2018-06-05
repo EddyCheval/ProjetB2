@@ -305,6 +305,7 @@ namespace ApplicationMarcassin
                 }
             }
         }
+
         private bool StringCheck(string s)
         {
             foreach (var x in s)
